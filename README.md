@@ -22,3 +22,9 @@ A database for the fish that you can catch.
 Ability to trade fish, sell to a generic merchant/system for a lower price, or trade to other players for a higher price.
 
 The ability to buy upgrades to improve the ability to fish.
+
+An inventory for each player that stores what fish they have caught.
+
+Background music that can change depending on what is happening.
+
+Weather affecting catching rates, like rain improving chances of catching fish.
