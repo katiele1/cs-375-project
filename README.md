@@ -28,3 +28,5 @@ An inventory for each player that stores what fish they have caught.
 Background music that can change depending on what is happening.
 
 Weather affecting catching rates, like rain improving chances of catching fish.
+
+Ability to chose where to fish which changes what kind of fish can be caught.
