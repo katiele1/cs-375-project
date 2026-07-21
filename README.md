@@ -17,11 +17,12 @@ Also add the ability to play anonymously, but player data is not saved.
 
 The fishing minigame itself and how fish are captured.
 
-A database for the fish that you can catch.
+A database for the fish that you can catch. Each fish has it's own weight and rarity,
+Individual fish weights can vary a little bit.
 
 Ability to trade fish, sell to a generic merchant/system for a lower price, or trade to other players for a higher price.
 
-The ability to buy upgrades to improve the ability to fish.
+The ability to buy upgrades to improve the ability to fish. Maybe lock upgrades behind levels and experience
 
 An inventory for each player that stores what fish they have caught.
 
@@ -29,4 +30,8 @@ Background music that can change depending on what is happening.
 
 Weather affecting catching rates, like rain improving chances of catching fish.
 
-Ability to chose where to fish which changes what kind of fish can be caught.
+Ability to choose where to fish, which changes what kind of fish can be caught.
+
+Ability to view profile/inventory to see what fish you have
+
+Game randomly generates what fish is caught from a pool of fish based on conditions
