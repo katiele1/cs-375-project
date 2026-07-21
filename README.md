@@ -15,9 +15,9 @@ For any API, we might use the Weather API that we used in the reading and lab.
 Ability to create an account that saves information about the player. 
 Also add the ability to play anonymously, but player data is not saved.
 
-The fishing minigame itself and how fish are captured.
+The fishing minigame itself and how fish are captured. Choose what bait you use.
 
-A database for the fish that you can catch. Each fish has it's own weight and rarity,
+A database for the fish that you can catch. Each fish has its own weight and rarity,
 Individual fish weights can vary a little bit.
 
 Ability to trade fish, sell to a generic merchant/system for a lower price, or trade to other players for a higher price.
@@ -35,3 +35,5 @@ Ability to choose where to fish, which changes what kind of fish can be caught.
 Ability to view profile/inventory to see what fish you have
 
 Game randomly generates what fish is caught from a pool of fish based on conditions
+
+Friend system where you can interact with other players. Chat or send gifts.
