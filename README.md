@@ -37,3 +37,5 @@ Ability to view profile/inventory to see what fish you have
 Game randomly generates what fish is caught from a pool of fish based on conditions
 
 Friend system where you can interact with other players. Chat or send gifts.
+
+Have the people playing affect the game itself. Like overfishing could impact catch rates.
