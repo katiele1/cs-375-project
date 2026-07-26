@@ -39,3 +39,6 @@ Game randomly generates what fish is caught from a pool of fish based on conditi
 Friend system where you can interact with other players. Chat or send gifts.
 
 Have the people playing affect the game itself. Like overfishing could impact catch rates.
+
+
+Each member has proficient knowledge and confidence in web development. If some members have more experience, then once they've completed the tasks we wanted to complete for that week, they can help other members who are struggling. Our regular meeting time will be on Tuesdays during class time. We have created a Discord groupchat to communicate. All group members have to deal with their own coursework, co-op, job, etc and we plan to address them by communicating in our group chat how much progress we each have and what tasks should be prioritized. We anticipate that it will take several hours per week (sometimes outside of class) to complete our goals. Each member can contribute class time and any necessary hours outside of class. All members should aim to complete the same amount of work. If one member doesn't follow through on commitments, we will repeatedly contact them through Discord and the other members will have to pick up their workload. Hopefully, we won't have to resort to that. 
