@@ -16,9 +16,6 @@ Ability to create an account that saves information about the player.
 Also add the ability to play anonymously, but player data is not saved.
 
 The fishing minigame itself and how fish are captured. Choose what bait you use.
-https://www.reddit.com/r/StardewValley/comments/lu0knr/i_loved_the_fishing_minigame_so_i_decided_to_make/
-https://codepen.io/pfndesign/pen/MWbrVeg
-
 
 A database for the fish that you can catch. Each fish has its own weight and rarity,
 Individual fish weights can vary a little bit.
