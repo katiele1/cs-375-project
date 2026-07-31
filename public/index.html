@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
+		<link rel="stylesheet" href="style.css">
 		<title>Fishing Game</title>
 	</head>
 
@@ -12,6 +13,20 @@
 
 		<p id="result"></p>
 
+		<button id="inventory-button">See Inventory</button>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Fish ID</th>
+					<th>Weight</th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody id="inventory-table"></tbody>
+		</table>
+
 		<script src="fishing.js"></script>
+		<script src="inventory.js"></script>
 	</body>
 </html>
