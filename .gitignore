@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 node_modules/
 gamedata.db
 .env
+=======
+node_modules/
+>>>>>>> 66c4a71be77931d8875173486a52d77f7d7ed620
