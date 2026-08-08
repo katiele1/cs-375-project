@@ -39,6 +39,17 @@
 		</div>
 		<p id="result"></p>
 
+		<div>
+			<select id="lobby-select">
+				<option value="Lobby 1">Lobby 1</option>
+				<option value="Lobby 2">Lobby 2</option>
+				<option value="Lobby 3">Lobby 3</option>
+			</select>
+			<button id="switch-lobby-button">Switch Lobby</button>
+			<div id="player-count">Players in lobby: 0</div>
+		</div>
+		<ul id="messages"></ul>
+
 		<button id="inventory-button">See Inventory</button>
 
 		<table>
@@ -52,7 +63,9 @@
 			<tbody id="inventory-table"></tbody>
 		</table>
 
+		<script src="websocket.js"></script>
 		<script src="fishing.js"></script>
 		<script src="inventory.js"></script>
+
 	</body>
 </html>

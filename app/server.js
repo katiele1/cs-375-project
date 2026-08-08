@@ -1,7 +1,11 @@
+let { WebSocketServer, WebSocket } = require("ws");
+let wss = new WebSocketServer({port: 8080})
+
 let express = require("express");
 let db = require("./database.js");
 let session = require("express-session");
 let crypto = require("node:crypto");
+
 
 let app = express();
 let hostname = "localhost";
@@ -22,6 +26,77 @@ app.use(
 
 app.use(express.json());
 app.use(express.static("../public"));
+
+wss.on('connection', (ws) => {
+	ws.username = "Someone"
+	ws.lobby = "Lobby 1"
+
+	let broadcastToLobby = (lobbyName, payload) => {
+		wss.clients.forEach((client) => {
+			if (client.readyState === WebSocket.OPEN && client.lobby === lobbyName) {
+					client.send(JSON.stringify(payload));
+				}
+		});
+	};
+
+	let updateLobbyCount = (lobbyName) => {
+		let count = 0;
+		wss.clients.forEach((client) => {
+			if (client.readyState === WebSocket.OPEN && client.lobby === lobbyName) {
+				count++;
+			}
+		});
+		broadcastToLobby(lobbyName, {type: 'countUpdate', count: count});
+	};
+
+	ws.on('message', (message, isBinary) => {
+		let rawMessage = message.toString();
+		try {
+			let data = JSON.parse(rawMessage);
+
+			if (data.type === 'join') {
+				ws.username = data.username;
+				ws.lobby = data.lobby;
+
+				console.log(`${ws.username} joined lobby: ${ws.lobby}`);
+
+				broadcastToLobby(ws.lobby, {type: 'message', text: `${ws.username} has joined the lobby!`});
+				updateLobbyCount(ws.lobby);
+				return;
+			}
+
+			if (data.type === 'switchLobby') {
+				let oldLobby = ws.lobby;
+				let newLobby = data.lobby;
+
+				if (oldLobby === newLobby) {
+					return;
+				}
+
+				broadcastToLobby(oldLobby, {type: 'message', text: `${ws.username} has left the lobby.`});
+				
+				ws.lobby = newLobby;
+
+				broadcastToLobby(newLobby, {type: 'message', text: `${ws.username} has joined the lobby!`});
+				updateLobbyCount(oldLobby);
+				updateLobbyCount(newLobby);
+			}
+
+			if (data.type === "catch") {
+				broadcastToLobby(ws.lobby, {type: "message", text: data.text});
+				return;
+			}
+		} catch (e) {
+			broadcastToLobby(ws.lobby, { type: 'message', text: rawMessage });
+		}
+	});
+
+	ws.on('close', () => {
+		console.log(`${ws.username} disconnected.`);
+		broadcastToLobby(ws.lobby, {type: 'message', text: `${ws.username} has left the lobby.` });
+		updateLobbyCount(ws.lobby);
+	});
+});
 
 function hashToken(token) {
 	return crypto.createHash("sha256").update(token).digest("hex");
