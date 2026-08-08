@@ -163,10 +163,6 @@ async function catchFish() {
     }
 }
 
-
-
-
-
 function gameLoop() {
 
     if (gameRunning) {
@@ -222,7 +218,6 @@ fishButton.addEventListener("click", async function () {
 });
 <<<<<<< HEAD
 */
-=======
 
 async function checkLoginStatus() {
 	try {
@@ -254,4 +249,4 @@ async function checkLoginStatus() {
 
 
 checkLoginStatus();
->>>>>>> 335566f4898e9f6a39e17088db91ae89b59d03ec
+
