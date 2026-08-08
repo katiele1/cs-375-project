@@ -34,13 +34,13 @@ app.post("/api/fish", function (req, res) {
 		});
 	}
 
-	let fish = {
-		name: "Bluegill",
-		weight: 1.4,
-		rarity: "Common",
-		value: 10,
-		id: 0,
-	};
+	let fish = db.prepare(`
+		SELECT id, name, avg_weight_kg, rarity, cost, image
+		FROM fishes
+		ORDER BY RANDOM()
+		LIMIT 1
+	`).get();
+	
 
 	let user = db.prepare(`
 		SELECT username
@@ -51,9 +51,16 @@ app.post("/api/fish", function (req, res) {
 	let insert = db.prepare(
 		`INSERT INTO catches (user, fish_id, weight, value) VALUES (?, ?, ?, ?)`,
 	);
-	insert.run(user.username, fish.id, fish.weight, fish.value);
+	insert.run(user.username, fish.id, fish.avg_weight_kg, fish.cost);
 
-	res.json(fish);
+	res.json({
+		fish_id: fish.id,
+		name: fish.name,
+		weight: fish.avg_weight_kg,
+		rarity: fish.rarity,
+		value: fish.cost,
+		image: fish.image
+});
 });
 
 app.post("/api/inventory", function (req, res) {
@@ -70,9 +77,17 @@ app.post("/api/inventory", function (req, res) {
 	`).get(req.session.userId);
 
 	let results = db.prepare(`
-		SELECT fish_id, weight, value
-		FROM catches
-		WHERE user = ?
+		SELECT
+			c.id AS catch_id,
+			f.id AS fish_id,
+			f.name,
+			f.rarity,
+			f.image,
+			c.weight,
+			c.value
+		FROM catches AS c
+		JOIN fishes AS f ON f.id = c.fish_id
+		WHERE c.user = ?
 	`).all(user.username);
 
 	res.json(results);
