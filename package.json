@@ -20,6 +20,8 @@
   "homepage": "https://github.com/katiele1/cs-375-project#readme",
   "dependencies": {
     "better-sqlite3": "^13.0.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "ws": "^8.21.3"
   }
 }
