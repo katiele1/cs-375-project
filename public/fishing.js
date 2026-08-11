@@ -32,6 +32,9 @@ if (logoutButton) {
 
 let baitPosition = 70;
 let fishPosition = Math.random() * 70;
+let fishSpeed;
+let catchSpeed;
+
 let progress = 0;
 
 let holding = false;
@@ -53,6 +56,21 @@ fishButton.addEventListener("mouseup", () => {
 fishButton.addEventListener("mouseleave", () => {
     holding = false;
 });
+
+function initializeFishMovement(){
+    let weight = fishData.weight;
+    if (weight >= 40){
+        fishSpeed = 0.2;
+        catchSpeed = 0.1;
+    }
+    else if ( weight >= 10){
+        fishSpeed = 0.3;
+        catchSpeed = 0.15;
+    } else {
+        fishSpeed = 0.35;
+        catchSpeed = 0.2;
+    }
+}
 
 function updateBait() {
 
@@ -77,7 +95,7 @@ function updateBait() {
 
 function updateFish() {
 
-    fishPosition += fishDirection * 0.2;
+    fishPosition += fishDirection * fishSpeed;
 
     if (fishPosition <= 0) {
         fishPosition = 0;
@@ -107,7 +125,7 @@ function checkCollision() {
 function updateProgress() {
 
     if (checkCollision()) {
-        progress += 0.15;
+        progress += catchSpeed;
     } else {
         progress -= 0.1;
     }
