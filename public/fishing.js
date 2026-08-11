@@ -30,10 +30,13 @@ if (logoutButton) {
 	});
 }
 
+
+let fishGenerated = false;
 let baitPosition = 70;
 let fishPosition = Math.random() * 70;
 let fishSpeed;
 let catchSpeed;
+let fishData;
 
 let progress = 0;
 
@@ -69,6 +72,22 @@ function initializeFishMovement(){
     } else {
         fishSpeed = 0.35;
         catchSpeed = 0.2;
+    }
+}
+
+async function  generateFish(){
+    try {
+        let response = await fetch("/api/fish", {
+            method: "POST"
+        });
+
+        fishData = await response.json();
+
+        if (!response.ok) {
+            throw new Error(fishData.error);
+        }
+    } catch (error) {
+        result.textContent = error.message;
     }
 }
 
@@ -159,31 +178,21 @@ async function catchFish() {
     fishButton.disabled = true;
 
     result.textContent = "You caught a fish!";
-
-    try {
-        let response = await fetch("/api/fish", {
-            method: "POST"
-        });
-
-        let fishData = await response.json();
-
-        if (!response.ok) {
-            throw new Error(fishData.error);
-        }
-
         result.textContent =
             `You caught a ${fishData.name}! ` +
             `It weighs ${fishData.weight} pounds and is worth ` +
             `${fishData.value} coins.`;
 
-    } catch (error) {
-        result.textContent = error.message;
-    }
+    generateFish();
 }
 
 function gameLoop() {
 
     if (gameRunning) {
+        if (!fishGenerated){
+            generateFish();
+            fishGenerated = true;
+        }
 
         updateBait();
         updateFish();
