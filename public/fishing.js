@@ -32,8 +32,14 @@ if (logoutButton) {
 	});
 }
 
+
+let fishGenerated = false;
 let baitPosition = 70;
 let fishPosition = Math.random() * 70;
+let fishSpeed;
+let catchSpeed;
+let fishData;
+
 let progress = 0;
 
 let holding = false;
@@ -55,6 +61,37 @@ fishButton.addEventListener("mouseup", () => {
 fishButton.addEventListener("mouseleave", () => {
     holding = false;
 });
+
+function initializeFishMovement(){
+    let weight = fishData.weight;
+    if (weight >= 40){
+        fishSpeed = 0.2;
+        catchSpeed = 0.1;
+    }
+    else if ( weight >= 10){
+        fishSpeed = 0.3;
+        catchSpeed = 0.15;
+    } else {
+        fishSpeed = 0.35;
+        catchSpeed = 0.2;
+    }
+}
+
+async function  generateFish(){
+    try {
+        let response = await fetch("/api/fish", {
+            method: "POST"
+        });
+
+        fishData = await response.json();
+
+        if (!response.ok) {
+            throw new Error(fishData.error);
+        }
+    } catch (error) {
+        result.textContent = error.message;
+    }
+}
 
 function updateBait() {
 
@@ -79,7 +116,7 @@ function updateBait() {
 
 function updateFish() {
 
-    fishPosition += fishDirection * 0.2;
+    fishPosition += fishDirection * fishSpeed;
 
     if (fishPosition <= 0) {
         fishPosition = 0;
@@ -109,7 +146,7 @@ function checkCollision() {
 function updateProgress() {
 
     if (checkCollision()) {
-        progress += 0.15;
+        progress += catchSpeed;
     } else {
         progress -= 0.1;
     }
@@ -143,18 +180,6 @@ async function catchFish() {
     fishButton.disabled = true;
 
     result.textContent = "You caught a fish!";
-
-    try {
-        let response = await fetch("/api/fish", {
-            method: "POST"
-        });
-
-        let fishData = await response.json();
-
-        if (!response.ok) {
-            throw new Error(fishData.error);
-        }
-
         result.textContent =
             `You caught a ${fishData.name}! ` +
             `It weighs ${fishData.weight} pounds and is worth ` +
@@ -162,10 +187,7 @@ async function catchFish() {
 
         //Restarts the game
         setTimeout(resetGame, 2000);
-
-    } catch (error) {
-        result.textContent = error.message;
-    }
+    
 }
 
 
@@ -190,6 +212,10 @@ function resetGame() {
 function gameLoop() {
 
     if (gameRunning) {
+        if (!fishGenerated){
+            generateFish();
+            fishGenerated = true;
+        }
 
         updateBait();
         updateFish();
@@ -241,3 +267,34 @@ fishButton.addEventListener("click", async function () {
 	}
 });
 */
+
+async function checkLoginStatus() {
+	try {
+		let response = await fetch("/api/me");
+		let data = await response.json();
+
+		if (response.ok && data.loggedIn) {
+			accountMessage.textContent = `Logged in as ${data.user.username}`;
+			currentUser = data.user;
+			loginButton.hidden = true;
+			registerButton.hidden = true;
+			logoutButton.hidden = false;
+		} else {
+			accountMessage.textContent = "You are playing anonymously.";
+			currentUser = null;
+			loginButton.hidden = false;
+			registerButton.hidden = false;
+			logoutButton.hidden = true;
+		}
+	} catch (error) {
+		accountMessage.textContent = "Could not check login status.";
+		currentUser = null;
+	}
+
+	if (typeof setupWebSocket === "function") {
+		setupWebSocket();
+	}
+}
+
+
+checkLoginStatus();

@@ -1,3 +1,7 @@
+require("dotenv").config({
+	path: "../.env",
+});
+
 let { WebSocketServer, WebSocket } = require("ws");
 let wss = new WebSocketServer({port: 8080})
 
@@ -5,11 +9,19 @@ let express = require("express");
 let db = require("./database.js");
 let session = require("express-session");
 let crypto = require("node:crypto");
-
+let nodemailer = require("nodemailer");
 
 let app = express();
 let hostname = "localhost";
 let port = 3000;
+
+let transporter = nodemailer.createTransport({
+	service: "gmail",
+	auth: {
+		user: process.env.EMAIL_USER,
+		pass: process.env.EMAIL_PASSWORD,
+	},
+});
 
 app.use(
 	session({
@@ -97,10 +109,6 @@ wss.on('connection', (ws) => {
 		updateLobbyCount(ws.lobby);
 	});
 });
-
-function hashToken(token) {
-	return crypto.createHash("sha256").update(token).digest("hex");
-}
 
 app.post("/api/fish", function (req, res) {
 	if (!req.session.userId) {
@@ -244,7 +252,7 @@ app.get("/api/me", function (req, res) {
 	});
 });
 
-app.post("/api/magic-link", function (req, res) {
+app.post("/api/magic-link", async function (req, res) {
 	let email =
 		typeof req.body.email === "string"
 			? req.body.email.trim().toLowerCase()
@@ -267,8 +275,8 @@ app.post("/api/magic-link", function (req, res) {
 		.get(email);
 
 	if (!user) {
-		return res.status(404).json({
-			error: "No account was found with that email.",
+		return res.json({
+			message: "If an account exists for that email, we've sent a login link."
 		});
 	}
 
@@ -288,14 +296,43 @@ app.post("/api/magic-link", function (req, res) {
 		`,
 		).run(user.id, token, expiresAt);
 
-		let link = `http://localhost:3000/api/verify-magic-link?token=${token}`;
+		let link = `${process.env.BASE_URL}/api/verify-magic-link?token=${token}`;
 
-		console.log("Magic link:");
-		console.log(link);
+		await transporter.sendMail({
+			from: `"Fishing Game" <${process.env.EMAIL_USER}>`,
+			to: user.email,
+			subject: "Fishing Game Login Link",
+
+			text:
+				`Click this link to log in:\n\n${link}\n\n` +
+				"This link expires in 15 minutes.",
+
+			html: `
+				<h2>Fishing Game</h2>
+
+				<p>Click the button below to log in.</p>
+
+				<p>
+					<a href="${link}"
+						style="
+							background:#3b82f6;
+							color:white;
+							padding:12px 20px;
+							text-decoration:none;
+							border-radius:6px;
+							display:inline-block;">
+						Log In
+					</a>
+				</p>
+
+				<p>This link expires in 15 minutes.</p>
+			`
+		});
 
 		res.json({
-			message: "Magic link created. Check the server terminal.",
+			message: "Check your email for your login link.",
 		});
+
 	} catch (error) {
 		console.error(error);
 
