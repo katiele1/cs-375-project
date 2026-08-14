@@ -4,6 +4,8 @@ let fish = document.querySelector(".fishing .sea .fish");
 let progressBar = document.querySelector(".fishing .progress .bar");
 let fishButton = document.getElementById("fish-button");
 let result = document.getElementById("result");
+
+
 let logoutButton = document.getElementById("logout-button");
 let accountMessage = document.getElementById("account-message");
 let loginLink = document.getElementById("login-link");
@@ -158,11 +160,29 @@ async function catchFish() {
             `It weighs ${fishData.weight} pounds and is worth ` +
             `${fishData.value} coins.`;
 
+        //Restarts the game
+        setTimeout(resetGame, 2000);
+
     } catch (error) {
         result.textContent = error.message;
     }
 }
 
+
+function resetGame() {
+    gameRunning = true;
+    holding = false;
+    progress = 0;
+
+    baitPosition = 70;
+    fishPosition = Math.random() * 70;
+    fishDirection = 1;
+
+    progressBar.style.height = "0%";
+    result.textContent = "";
+
+    fishButton.disabled = false;
+}
 
 
 
@@ -220,38 +240,4 @@ fishButton.addEventListener("click", async function () {
 		result.textContent = error.message;
 	}
 });
-<<<<<<< HEAD
 */
-=======
-
-async function checkLoginStatus() {
-	try {
-		let response = await fetch("/api/me");
-		let data = await response.json();
-
-		if (response.ok && data.loggedIn) {
-			accountMessage.textContent = `Logged in as ${data.user.username}`;
-			currentUser = data.user;
-			loginButton.hidden = true;
-			registerButton.hidden = true;
-			logoutButton.hidden = false;
-		} else {
-			accountMessage.textContent = "You are playing anonymously.";
-			currentUser = null;
-			loginButton.hidden = false;
-			registerButton.hidden = false;
-			logoutButton.hidden = true;
-		}
-	} catch (error) {
-		accountMessage.textContent = "Could not check login status.";
-		currentUser = null;
-	}
-
-	if (typeof setupWebSocket === "function") {
-		setupWebSocket();
-	}
-}
-
-
-checkLoginStatus();
->>>>>>> 335566f4898e9f6a39e17088db91ae89b59d03ec
