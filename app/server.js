@@ -151,8 +151,6 @@ app.post("/api/catchFish", function (req, res) {
 	}
 
 	let fishId = req.body.fish_id;
-	
-	
 
 	let user = db.prepare(`
 		SELECT username
@@ -179,9 +177,10 @@ app.post("/api/catchFish", function (req, res) {
     }
 
 	db.prepare(`INSERT INTO catches (user, fish_id, weight, value) VALUES (?, ?, ?, ?)`).run
-	(user.username,fish.id,fish.avg_weight_kg,fish.cost);
-	
+	(user.username, fish.id, fish.avg_weight_kg, fish.cost);
 
+	db.prepare(`UPDATE users SET experience = experience + ? WHERE id = ?`).run(10, req.session.userId); 
+	
 	res.json({
         message: "Fish caught!",
 		fish_id: fish.id,
