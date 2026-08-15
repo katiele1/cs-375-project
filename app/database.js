@@ -22,7 +22,8 @@ db.prepare(`
 		avg_length_cm REAL,
 		rarity TEXT NOT NULL,
 		cost INTEGER NOT NULL,
-		image TEXT
+		image TEXT,
+		location TEXT
 	)
 `).run();
 
@@ -54,9 +55,10 @@ const insertFish = db.prepare(`
 		avg_length_cm,
 		rarity,
 		cost,
-		image
+		image,
+		location
 	)
-	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 	ON CONFLICT(id) DO UPDATE SET
 		name = excluded.name,
 		latin_name = excluded.latin_name,
@@ -65,7 +67,8 @@ const insertFish = db.prepare(`
 		avg_length_cm = excluded.avg_length_cm,
 		rarity = excluded.rarity,
 		cost = excluded.cost,
-		image = excluded.image
+		image = excluded.image,
+		location = excluded.location
 `);
 
 const importFishes = db.transaction((fishList) => {
@@ -79,7 +82,8 @@ const importFishes = db.transaction((fishList) => {
 			fish.avg_length_cm,
 			fish.rarity,
 			fish.cost,
-			fish.image
+			fish.image,
+			fish.location
 		);
 	}
 });

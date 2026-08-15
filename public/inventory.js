@@ -25,6 +25,11 @@ inventoryButton.addEventListener("click", async function () {
             idCell.textContent = fish.fish_id;
             row.append(idCell);
 
+            let nameCell = document.createElement("td");
+            console.log(fish.name);
+            nameCell.textContent = fish.name;
+            row.append(nameCell);
+
             let weightCell = document.createElement("td");
             console.log(fish.weight);
             weightCell.textContent = fish.weight;
@@ -35,6 +40,11 @@ inventoryButton.addEventListener("click", async function () {
             valueCell.textContent = fish.value;
             row.append(valueCell);
             inventoryTable.append(row);
+
+            let locationCell = document.createElement("td");
+            console.log(fish.location);
+            locationCell.textContent = fish.location;
+            row.append(locationCell);
         }
 
 	} catch (error) {

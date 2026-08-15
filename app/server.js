@@ -110,7 +110,8 @@ wss.on('connection', (ws) => {
 	});
 });
 
-app.post("/api/fish", function (req, res) {
+
+app.post("/api/generateFish", function (req, res) {
 	if (!req.session.userId) {
 		return res.status(401).json({
 			error: "You must be logged in to fish.",
@@ -118,11 +119,39 @@ app.post("/api/fish", function (req, res) {
 	}
 
 	let fish = db.prepare(`
-		SELECT id, name, avg_weight_kg, rarity, cost, image
+		SELECT id, name, avg_weight_kg, rarity, cost, image, location
 		FROM fishes
 		ORDER BY RANDOM()
 		LIMIT 1
 	`).get();
+
+	if (!fish) {
+		return res.status(500).json({
+			error: "Could not generate a fish."
+		});
+	}
+	
+	res.json({
+		fish_id: fish.id,
+		name: fish.name,
+		weight: fish.avg_weight_kg,
+		rarity: fish.rarity,
+		value: fish.cost,
+		image: fish.image,
+		location: fish.location
+});
+});
+
+
+app.post("/api/catchFish", function (req, res) {
+	if (!req.session.userId) {
+		return res.status(401).json({
+			error: "You must be logged in to fish.",
+		});
+	}
+
+	let fishId = req.body.fish_id;
+	
 	
 
 	let user = db.prepare(`
@@ -131,19 +160,35 @@ app.post("/api/fish", function (req, res) {
 		WHERE id = ?
 	`).get(req.session.userId);
 
-	let insert = db.prepare(
-		`INSERT INTO catches (user, fish_id, weight, value) VALUES (?, ?, ?, ?)`,
-	);
-	insert.run(user.username, fish.id, fish.avg_weight_kg, fish.cost);
+	if (!user) {
+		return res.status(401).json({
+			error: "User not found."
+		});
+	}
+
+	let fish = db.prepare(`
+        SELECT id, name, avg_weight_kg, cost
+        FROM fishes
+        WHERE id = ?
+    `).get(fishId);
+
+	if (!fish) {
+        return res.status(404).json({
+            error: "Fish not found."
+        });
+    }
+
+	db.prepare(`INSERT INTO catches (user, fish_id, weight, value) VALUES (?, ?, ?, ?)`).run
+	(user.username,fish.id,fish.avg_weight_kg,fish.cost);
+	
 
 	res.json({
+        message: "Fish caught!",
 		fish_id: fish.id,
 		name: fish.name,
 		weight: fish.avg_weight_kg,
-		rarity: fish.rarity,
-		value: fish.cost,
-		image: fish.image
-});
+		value: fish.cost
+    });
 });
 
 app.post("/api/inventory", function (req, res) {
@@ -167,7 +212,8 @@ app.post("/api/inventory", function (req, res) {
 			f.rarity,
 			f.image,
 			c.weight,
-			c.value
+			c.value,
+			f.location
 		FROM catches AS c
 		JOIN fishes AS f ON f.id = c.fish_id
 		WHERE c.user = ?
