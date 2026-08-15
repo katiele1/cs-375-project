@@ -1,5 +1,10 @@
 let Database = require("better-sqlite3");
-let db = new Database("gamedata.db");
+
+
+let path = require("path");
+let dbPath = path.join(__dirname, "gamedata.db"); 
+let db = new Database(dbPath);
+
 const fishes = require("./fishes.json");
 
 db.prepare(

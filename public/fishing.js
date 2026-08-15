@@ -84,7 +84,7 @@ async function generateFish() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                location: document.getElementById("location-select").value
+                location: document.getElementById("lobby-select").value
             })
         });
 
@@ -221,7 +221,16 @@ async function catchFish() {
             `It weighs ${fishData.weight} kgs and is worth ` +
             `${fishData.value} coins.`;
 
+		if (socket && socket.readyState === WebSocket.OPEN) {
+			let caughtNoticeUser = currentUser ? currentUser.username : "Someone";
+            let currentLobby = document.getElementById("lobby-select").value;
 
+			socket.send(JSON.stringify({
+  				type: "catch",
+                lobby: currentLobby,
+  		  		text: `${caughtNoticeUser} just caught a ${fishData.name} (${fishData.weight} lbs)!`
+			}));
+        }
         } catch (error) {
             result.textContent = error.message;
         }
@@ -249,7 +258,7 @@ function resetGame() {
     startGame();
 }
 
-document.getElementById("location-select").addEventListener("change", function () {
+document.getElementById("lobby-select").addEventListener("change", function () {
     resetGame();
 });
 
@@ -299,18 +308,7 @@ fishButton.addEventListener("click", async function () {
 			`It weighs ${fish.weight} pounds and is worth ` +
 			`${fish.value} coins.`;
 		
-		if (socket && socket.readyState === WebSocket.OPEN) {
-			let caughtNoticeUser;
 
-			if (currentUser) {
-				caughtNoticeUser = currentUser.username;
-			} else {
-				caughtNoticeUser = "Someone";
-			}
-			socket.send(JSON.stringify({
-  				type: "catch",
-  		  		text: `${caughtNoticeUser} just caught a ${fish.name} (${fish.weight} lbs)!`
-			}));
 		}
 	} catch (error) {
 		result.textContent = error.message;
