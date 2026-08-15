@@ -8,7 +8,8 @@
     "avg_length_cm": 13.5,
     "rarity": "Common",
     "cost": 8,
-    "image": "images/fish/1.png"
+    "image": "images/fish/1.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 2,
@@ -19,7 +20,8 @@
     "avg_length_cm": 40.0,
     "rarity": "Common",
     "cost": 20,
-    "image": "images/fish/2.png"
+    "image": "images/fish/2.png",
+    "location": "fresh river water"
   },
   {
     "fish_id": 3,
@@ -30,7 +32,8 @@
     "avg_length_cm": 80.0,
     "rarity": "Uncommon",
     "cost": 12,
-    "image": "images/fish/3.png"
+    "image": "images/fish/3.png",
+    "location": "fresh river water"
   },
   {
     "fish_id": 4,
@@ -41,7 +44,8 @@
     "avg_length_cm": 55.0,
     "rarity": "Uncommon",
     "cost": 25,
-    "image": "images/fish/4.png"
+    "image": "images/fish/4.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 5,
@@ -52,7 +56,8 @@
     "avg_length_cm": 35.0,
     "rarity": "Uncommon",
     "cost": 18,
-    "image": "images/fish/5.png"
+    "image": "images/fish/5.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 6,
@@ -63,7 +68,8 @@
     "avg_length_cm": 45.0,
     "rarity": "Uncommon",
     "cost": 22,
-    "image": "images/fish/6.png"
+    "image": "images/fish/6.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 7,
@@ -74,7 +80,8 @@
     "avg_length_cm": 50.0,
     "rarity": "Uncommon",
     "cost": 20,
-    "image": "images/fish/7.png"
+    "image": "images/fish/7.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 8,
@@ -85,7 +92,8 @@
     "avg_length_cm": 70.0,
     "rarity": "Uncommon",
     "cost": 15,
-    "image": "images/fish/8.png"
+    "image": "images/fish/8.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 9,
@@ -96,7 +104,8 @@
     "avg_length_cm": 60.0,
     "rarity": "Uncommon",
     "cost": 14,
-    "image": "images/fish/9.png"
+    "image": "images/fish/9.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 10,
@@ -107,7 +116,8 @@
     "avg_length_cm": 60.0,
     "rarity": "Uncommon",
     "cost": 12,
-    "image": "images/fish/10.png"
+    "image": "images/fish/10.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 11,
@@ -118,7 +128,8 @@
     "avg_length_cm": 30.0,
     "rarity": "Uncommon",
     "cost": 12,
-    "image": "images/fish/11.png"
+    "image": "images/fish/11.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 12,
@@ -129,7 +140,8 @@
     "avg_length_cm": 200.0,
     "rarity": "Legendary",
     "cost": 100,
-    "image": "images/fish/12.png"
+    "image": "images/fish/12.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 13,
@@ -140,7 +152,8 @@
     "avg_length_cm": 70.0,
     "rarity": "Uncommon",
     "cost": 15,
-    "image": "images/fish/13.png"
+    "image": "images/fish/13.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 14,
@@ -151,7 +164,8 @@
     "avg_length_cm": 150.0,
     "rarity": "Rare",
     "cost": 30,
-    "image": "images/fish/14.png"
+    "image": "images/fish/14.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 15,
@@ -162,7 +176,8 @@
     "avg_length_cm": 60.0,
     "rarity": "Legendary",
     "cost": 50,
-    "image": "images/fish/15.png"
+    "image": "images/fish/15.png",
+    "location": "fresh river water"
   },
   {
     "fish_id": 16,
@@ -173,7 +188,8 @@
     "avg_length_cm": 35.0,
     "rarity": "Uncommon",
     "cost": 12,
-    "image": "images/fish/16.png"
+    "image": "images/fish/16.png",
+    "location": "brackish water"
   },
   {
     "fish_id": 17,
@@ -184,7 +200,8 @@
     "avg_length_cm": 100.0,
     "rarity": "Legendary",
     "cost": 40,
-    "image": "images/fish/17.png"
+    "image": "images/fish/17.png",
+    "location": "coral reef water"
   },
   {
     "fish_id": 18,
@@ -195,7 +212,8 @@
     "avg_length_cm": 120.0,
     "rarity": "Legendary",
     "cost": 100,
-    "image": "images/fish/18.png"
+    "image": "images/fish/18.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 19,
@@ -206,7 +224,8 @@
     "avg_length_cm": 30.0,
     "rarity": "Uncommon",
     "cost": 10,
-    "image": "images/fish/19.png"
+    "image": "images/fish/19.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 20,
@@ -217,7 +236,8 @@
     "avg_length_cm": 35.0,
     "rarity": "Uncommon",
     "cost": 15,
-    "image": "images/fish/20.png"
+    "image": "images/fish/20.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 21,
@@ -228,7 +248,8 @@
     "avg_length_cm": 50.0,
     "rarity": "Rare",
     "cost": 20,
-    "image": "images/fish/21.png"
+    "image": "images/fish/21.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 22,
@@ -239,7 +260,8 @@
     "avg_length_cm": 50.0,
     "rarity": "Uncommon",
     "cost": 14,
-    "image": "images/fish/22.png"
+    "image": "images/fish/22.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 23,
@@ -250,7 +272,8 @@
     "avg_length_cm": 60.0,
     "rarity": "Uncommon",
     "cost": 15,
-    "image": "images/fish/23.png"
+    "image": "images/fish/23.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 24,
@@ -261,7 +284,8 @@
     "avg_length_cm": 70.0,
     "rarity": "Uncommon",
     "cost": 16,
-    "image": "images/fish/24.png"
+    "image": "images/fish/24.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 25,
@@ -272,7 +296,8 @@
     "avg_length_cm": 250.0,
     "rarity": "Legendary",
     "cost": 60,
-    "image": "images/fish/25.png"
+    "image": "images/fish/25.png",
+    "location": "deep ocean water"
   },
   {
     "fish_id": 26,
@@ -283,7 +308,8 @@
     "avg_length_cm": 100.0,
     "rarity": "Rare",
     "cost": 35,
-    "image": "images/fish/26.png"
+    "image": "images/fish/26.png",
+    "location": "deep ocean water"
   },
   {
     "fish_id": 27,
@@ -294,7 +320,8 @@
     "avg_length_cm": 150.0,
     "rarity": "Uncommon",
     "cost": 40,
-    "image": "images/fish/27.png"
+    "image": "images/fish/27.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 28,
@@ -305,7 +332,8 @@
     "avg_length_cm": 30.0,
     "rarity": "Uncommon",
     "cost": 8,
-    "image": "images/fish/28.png"
+    "image": "images/fish/28.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 29,
@@ -316,7 +344,8 @@
     "avg_length_cm": 40.0,
     "rarity": "Rare",
     "cost": 30,
-    "image": "images/fish/29.png"
+    "image": "images/fish/29.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 30,
@@ -327,7 +356,8 @@
     "avg_length_cm": 100.0,
     "rarity": "Rare",
     "cost": 20,
-    "image": "images/fish/30.png"
+    "image": "images/fish/30.png",
+    "location": "deep ocean water"
   },
   {
     "fish_id": 31,
@@ -338,7 +368,8 @@
     "avg_length_cm": 35.0,
     "rarity": "Uncommon",
     "cost": 8,
-    "image": "images/fish/31.png"
+    "image": "images/fish/31.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 32,
@@ -349,7 +380,8 @@
     "avg_length_cm": 300.0,
     "rarity": "Legendary",
     "cost": 100,
-    "image": "images/fish/32.png"
+    "image": "images/fish/32.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 33,
@@ -360,7 +392,8 @@
     "avg_length_cm": 100.0,
     "rarity": "Rare",
     "cost": 25,
-    "image": "images/fish/33.png"
+    "image": "images/fish/33.png",
+    "location": "brackish water"
   },
   {
     "fish_id": 34,
@@ -371,7 +404,8 @@
     "avg_length_cm": 40.0,
     "rarity": "Uncommon",
     "cost": 15,
-    "image": "images/fish/34.png"
+    "image": "images/fish/34.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 35,
@@ -382,7 +416,8 @@
     "avg_length_cm": 100.0,
     "rarity": "Uncommon",
     "cost": 25,
-    "image": "images/fish/35.png"
+    "image": "images/fish/35.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 36,
@@ -393,7 +428,8 @@
     "avg_length_cm": 50.0,
     "rarity": "Uncommon",
     "cost": 15,
-    "image": "images/fish/36.png"
+    "image": "images/fish/36.png",
+    "location": "brackish water"
   },
   {
     "fish_id": 37,
@@ -404,7 +440,8 @@
     "avg_length_cm": 30.0,
     "rarity": "Uncommon",
     "cost": 18,
-    "image": "images/fish/37.png"
+    "image": "images/fish/37.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 38,
@@ -415,7 +452,8 @@
     "avg_length_cm": 80.0,
     "rarity": "Rare",
     "cost": 30,
-    "image": "images/fish/38.png"
+    "image": "images/fish/38.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 39,
@@ -426,7 +464,8 @@
     "avg_length_cm": 50.0,
     "rarity": "Rare",
     "cost": 30,
-    "image": "images/fish/39.png"
+    "image": "images/fish/39.png",
+    "location": "coral reef water"
   },
   {
     "fish_id": 40,
@@ -437,7 +476,8 @@
     "avg_length_cm": 40.0,
     "rarity": "Uncommon",
     "cost": 15,
-    "image": "images/fish/40.png"
+    "image": "images/fish/40.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 41,
@@ -448,7 +488,8 @@
     "avg_length_cm": 60.0,
     "rarity": "Uncommon",
     "cost": 18,
-    "image": "images/fish/41.png"
+    "image": "images/fish/41.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 42,
@@ -459,7 +500,8 @@
     "avg_length_cm": 60.0,
     "rarity": "Uncommon",
     "cost": 10,
-    "image": "images/fish/42.png"
+    "image": "images/fish/42.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 43,
@@ -470,7 +512,8 @@
     "avg_length_cm": 25.0,
     "rarity": "Common",
     "cost": 8,
-    "image": "images/fish/43.png"
+    "image": "images/fish/43.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 44,
@@ -481,7 +524,8 @@
     "avg_length_cm": 80.0,
     "rarity": "Rare",
     "cost": 30,
-    "image": "images/fish/44.png"
+    "image": "images/fish/44.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 45,
@@ -492,7 +536,8 @@
     "avg_length_cm": 50.0,
     "rarity": "Rare",
     "cost": 20,
-    "image": "images/fish/45.png"
+    "image": "images/fish/45.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 46,
@@ -503,7 +548,8 @@
     "avg_length_cm": 80.0,
     "rarity": "Rare",
     "cost": 30,
-    "image": "images/fish/46.png"
+    "image": "images/fish/46.png",
+    "location": "deep ocean water"
   },
   {
     "fish_id": 47,
@@ -514,7 +560,8 @@
     "avg_length_cm": 70.0,
     "rarity": "Rare",
     "cost": 25,
-    "image": "images/fish/47.png"
+    "image": "images/fish/47.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 48,
@@ -525,7 +572,8 @@
     "avg_length_cm": 60.0,
     "rarity": "Rare",
     "cost": 20,
-    "image": "images/fish/48.png"
+    "image": "images/fish/48.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 49,
@@ -536,7 +584,8 @@
     "avg_length_cm": 60.0,
     "rarity": "Uncommon",
     "cost": 18,
-    "image": "images/fish/49.png"
+    "image": "images/fish/49.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 50,
@@ -547,7 +596,8 @@
     "avg_length_cm": 80.0,
     "rarity": "Rare",
     "cost": 25,
-    "image": "images/fish/50.png"
+    "image": "images/fish/50.png",
+    "location": "deep ocean water"
   },
   {
     "fish_id": 51,
@@ -558,7 +608,8 @@
     "avg_length_cm": 70.0,
     "rarity": "Uncommon",
     "cost": 18,
-    "image": "images/fish/51.png"
+    "image": "images/fish/51.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 52,
@@ -569,7 +620,8 @@
     "avg_length_cm": 80.0,
     "rarity": "Rare",
     "cost": 25,
-    "image": "images/fish/52.png"
+    "image": "images/fish/52.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 53,
@@ -580,7 +632,8 @@
     "avg_length_cm": 70.0,
     "rarity": "Uncommon",
     "cost": 25,
-    "image": "images/fish/53.png"
+    "image": "images/fish/53.png",
+    "location": "fresh river water"
   },
   {
     "fish_id": 54,
@@ -591,7 +644,8 @@
     "avg_length_cm": 90.0,
     "rarity": "Uncommon",
     "cost": 35,
-    "image": "images/fish/54.png"
+    "image": "images/fish/54.png",
+    "location": "fresh river water"
   },
   {
     "fish_id": 55,
@@ -602,7 +656,8 @@
     "avg_length_cm": 75.0,
     "rarity": "Uncommon",
     "cost": 15,
-    "image": "images/fish/55.png"
+    "image": "images/fish/55.png",
+    "location": "fresh river water"
   },
   {
     "fish_id": 56,
@@ -613,7 +668,8 @@
     "avg_length_cm": 70.0,
     "rarity": "Uncommon",
     "cost": 25,
-    "image": "images/fish/56.png"
+    "image": "images/fish/56.png",
+    "location": "fresh river water"
   },
   {
     "fish_id": 57,
@@ -624,7 +680,8 @@
     "avg_length_cm": 50.0,
     "rarity": "Uncommon",
     "cost": 12,
-    "image": "images/fish/57.png"
+    "image": "images/fish/57.png",
+    "location": "fresh river water"
   },
   {
     "fish_id": 58,
@@ -635,7 +692,8 @@
     "avg_length_cm": 60.0,
     "rarity": "Uncommon",
     "cost": 30,
-    "image": "images/fish/58.png"
+    "image": "images/fish/58.png",
+    "location": "fresh river water"
   },
   {
     "fish_id": 59,
@@ -646,7 +704,8 @@
     "avg_length_cm": 20.0,
     "rarity": "Uncommon",
     "cost": 8,
-    "image": "images/fish/59.png"
+    "image": "images/fish/59.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 60,
@@ -657,7 +716,8 @@
     "avg_length_cm": 500.0,
     "rarity": "Legendary",
     "cost": 100,
-    "image": "images/fish/60.png"
+    "image": "images/fish/60.png",
+    "location": "brackish water"
   },
   {
     "fish_id": 61,
@@ -668,7 +728,8 @@
     "avg_length_cm": 30.0,
     "rarity": "Uncommon",
     "cost": 10,
-    "image": "images/fish/61.png"
+    "image": "images/fish/61.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 62,
@@ -679,7 +740,8 @@
     "avg_length_cm": 150.0,
     "rarity": "Legendary",
     "cost": 100,
-    "image": "images/fish/62.png"
+    "image": "images/fish/62.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 63,
@@ -690,7 +752,8 @@
     "avg_length_cm": 250.0,
     "rarity": "Legendary",
     "cost": 100,
-    "image": "images/fish/63.png"
+    "image": "images/fish/63.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 64,
@@ -701,7 +764,8 @@
     "avg_length_cm": 250.0,
     "rarity": "Legendary",
     "cost": 100,
-    "image": "images/fish/64.png"
+    "image": "images/fish/64.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 65,
@@ -712,7 +776,8 @@
     "avg_length_cm": 180.0,
     "rarity": "Rare",
     "cost": 60,
-    "image": "images/fish/65.png"
+    "image": "images/fish/65.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 66,
@@ -723,7 +788,8 @@
     "avg_length_cm": 200.0,
     "rarity": "Legendary",
     "cost": 100,
-    "image": "images/fish/66.png"
+    "image": "images/fish/66.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 67,
@@ -734,7 +800,8 @@
     "avg_length_cm": 120.0,
     "rarity": "Rare",
     "cost": 60,
-    "image": "images/fish/67.png"
+    "image": "images/fish/67.png",
+    "location": "deep ocean water"
   },
   {
     "fish_id": 68,
@@ -745,7 +812,8 @@
     "avg_length_cm": 150.0,
     "rarity": "Legendary",
     "cost": 100,
-    "image": "images/fish/68.png"
+    "image": "images/fish/68.png",
+    "location": "deep ocean water"
   },
   {
     "fish_id": 69,
@@ -756,7 +824,8 @@
     "avg_length_cm": 180.0,
     "rarity": "Legendary",
     "cost": 100,
-    "image": "images/fish/69.png"
+    "image": "images/fish/69.png",
+    "location": "deep ocean water"
   },
   {
     "fish_id": 70,
@@ -767,7 +836,8 @@
     "avg_length_cm": 120.0,
     "rarity": "Rare",
     "cost": 30,
-    "image": "images/fish/70.png"
+    "image": "images/fish/70.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 71,
@@ -778,7 +848,8 @@
     "avg_length_cm": 40.0,
     "rarity": "Uncommon",
     "cost": 30,
-    "image": "images/fish/71.png"
+    "image": "images/fish/71.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 72,
@@ -789,7 +860,8 @@
     "avg_length_cm": 35.0,
     "rarity": "Uncommon",
     "cost": 20,
-    "image": "images/fish/72.png"
+    "image": "images/fish/72.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 73,
@@ -800,7 +872,8 @@
     "avg_length_cm": 30.0,
     "rarity": "Uncommon",
     "cost": 18,
-    "image": "images/fish/73.png"
+    "image": "images/fish/73.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 74,
@@ -811,7 +884,8 @@
     "avg_length_cm": 12.0,
     "rarity": "Common",
     "cost": 5,
-    "image": "images/fish/74.png"
+    "image": "images/fish/74.png",
+    "location": "brackish water"
   },
   {
     "fish_id": 75,
@@ -822,7 +896,8 @@
     "avg_length_cm": 80.0,
     "rarity": "Legendary",
     "cost": 30,
-    "image": "images/fish/75.png"
+    "image": "images/fish/75.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 76,
@@ -833,7 +908,8 @@
     "avg_length_cm": 200.0,
     "rarity": "Legendary",
     "cost": 100,
-    "image": "images/fish/76.png"
+    "image": "images/fish/76.png",
+    "location": "fresh river water"
   },
   {
     "fish_id": 77,
@@ -844,7 +920,8 @@
     "avg_length_cm": 200.0,
     "rarity": "Rare",
     "cost": 40,
-    "image": "images/fish/77.png"
+    "image": "images/fish/77.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 78,
@@ -855,7 +932,8 @@
     "avg_length_cm": 40.0,
     "rarity": "Common",
     "cost": 10,
-    "image": "images/fish/78.png"
+    "image": "images/fish/78.png",
+    "location": "fresh river water"
   },
   {
     "fish_id": 79,
@@ -866,7 +944,8 @@
     "avg_length_cm": 40.0,
     "rarity": "Uncommon",
     "cost": 15,
-    "image": "images/fish/79.png"
+    "image": "images/fish/79.png",
+    "location": "fresh river water"
   },
   {
     "fish_id": 80,
@@ -877,7 +956,8 @@
     "avg_length_cm": 100.0,
     "rarity": "Uncommon",
     "cost": 25,
-    "image": "images/fish/80.png"
+    "image": "images/fish/80.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 81,
@@ -888,7 +968,8 @@
     "avg_length_cm": 300.0,
     "rarity": "Legendary",
     "cost": 100,
-    "image": "images/fish/81.png"
+    "image": "images/fish/81.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 82,
@@ -899,7 +980,8 @@
     "avg_length_cm": 180.0,
     "rarity": "Rare",
     "cost": 35,
-    "image": "images/fish/82.png"
+    "image": "images/fish/82.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 83,
@@ -910,7 +992,8 @@
     "avg_length_cm": 250.0,
     "rarity": "Legendary",
     "cost": 100,
-    "image": "images/fish/83.png"
+    "image": "images/fish/83.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 84,
@@ -921,7 +1004,8 @@
     "avg_length_cm": 80.0,
     "rarity": "Uncommon",
     "cost": 15,
-    "image": "images/fish/84.png"
+    "image": "images/fish/84.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 85,
@@ -932,7 +1016,8 @@
     "avg_length_cm": 200.0,
     "rarity": "Legendary",
     "cost": 100,
-    "image": "images/fish/85.png"
+    "image": "images/fish/85.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 86,
@@ -943,7 +1028,8 @@
     "avg_length_cm": 180.0,
     "rarity": "Uncommon",
     "cost": 35,
-    "image": "images/fish/86.png"
+    "image": "images/fish/86.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 87,
@@ -954,7 +1040,8 @@
     "avg_length_cm": 60.0,
     "rarity": "Uncommon",
     "cost": 35,
-    "image": "images/fish/87.png"
+    "image": "images/fish/87.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 88,
@@ -965,7 +1052,8 @@
     "avg_length_cm": 80.0,
     "rarity": "Uncommon",
     "cost": 15,
-    "image": "images/fish/88.png"
+    "image": "images/fish/88.png",
+    "location": "deep ocean water"
   },
   {
     "fish_id": 89,
@@ -976,7 +1064,8 @@
     "avg_length_cm": 35.0,
     "rarity": "Uncommon",
     "cost": 10,
-    "image": "images/fish/89.png"
+    "image": "images/fish/89.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 90,
@@ -987,7 +1076,8 @@
     "avg_length_cm": 40.0,
     "rarity": "Rare",
     "cost": 20,
-    "image": "images/fish/90.png"
+    "image": "images/fish/90.png",
+    "location": "deep ocean water"
   },
   {
     "fish_id": 91,
@@ -998,7 +1088,8 @@
     "avg_length_cm": 120.0,
     "rarity": "Rare",
     "cost": 30,
-    "image": "images/fish/91.png"
+    "image": "images/fish/91.png",
+    "location": "deep ocean water"
   },
   {
     "fish_id": 92,
@@ -1009,7 +1100,8 @@
     "avg_length_cm": 40.0,
     "rarity": "Uncommon",
     "cost": 15,
-    "image": "images/fish/92.png"
+    "image": "images/fish/92.png",
+    "location": "salty ocean water"
   },
   {
     "fish_id": 93,
@@ -1020,6 +1112,7 @@
     "avg_length_cm": 100.0,
     "rarity": "Rare",
     "cost": 35,
-    "image": "images/fish/93.png"
+    "image": "images/fish/93.png",
+    "location": "deep ocean water"
   }
 ]
