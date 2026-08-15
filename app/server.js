@@ -119,7 +119,7 @@ app.post("/api/generateFish", function (req, res) {
 	}
 
 	let fish = db.prepare(`
-		SELECT id, name, avg_weight_kg, rarity, cost, image
+		SELECT id, name, avg_weight_kg, rarity, cost, image, location
 		FROM fishes
 		ORDER BY RANDOM()
 		LIMIT 1
@@ -137,7 +137,8 @@ app.post("/api/generateFish", function (req, res) {
 		weight: fish.avg_weight_kg,
 		rarity: fish.rarity,
 		value: fish.cost,
-		image: fish.image
+		image: fish.image,
+		location: fish.location
 });
 });
 
@@ -211,7 +212,8 @@ app.post("/api/inventory", function (req, res) {
 			f.rarity,
 			f.image,
 			c.weight,
-			c.value
+			c.value,
+			f.location
 		FROM catches AS c
 		JOIN fishes AS f ON f.id = c.fish_id
 		WHERE c.user = ?
