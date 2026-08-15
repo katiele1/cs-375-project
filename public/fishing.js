@@ -6,11 +6,14 @@ let fishButton = document.getElementById("fish-button");
 let result = document.getElementById("result");
 let logoutButton = document.getElementById("logout-button");
 let accountMessage = document.getElementById("account-message");
-let loginLink = document.getElementById("login-link");
-let registerLink = document.getElementById("register-link");
 let loginButton = document.getElementById("login-button");
 let registerButton = document.getElementById("register-button");
 let currentUser = null;
+let profileButton = document.getElementById("profile-button");
+
+profileButton.addEventListener("click", function () {
+	location.href = "profile.html";
+});
 
 loginButton.addEventListener("click", function () {
 	location.href = "login.html";
@@ -38,9 +41,6 @@ let holding = false;
 let fishDirection = 1;
 
 let gameRunning = true;
-
-
-
 
 fishButton.addEventListener("mousedown", () => {
     holding = true;
@@ -216,7 +216,6 @@ fishButton.addEventListener("click", async function () {
 		result.textContent = error.message;
 	}
 });
-<<<<<<< HEAD
 */
 
 async function checkLoginStatus() {
