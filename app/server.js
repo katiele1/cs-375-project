@@ -117,13 +117,21 @@ app.post("/api/generateFish", function (req, res) {
 			error: "You must be logged in to fish.",
 		});
 	}
+	let location = req.body?.location?.trim();
+
+	if (!location) {
+		return res.status(400).json({
+			error: "Location is required.",
+		});
+	}
 
 	let fish = db.prepare(`
 		SELECT id, name, avg_weight_kg, rarity, cost, image, location
 		FROM fishes
+		WHERE location = ?
 		ORDER BY RANDOM()
 		LIMIT 1
-	`).get();
+	`).get(location);
 
 	if (!fish) {
 		return res.status(500).json({

@@ -79,7 +79,13 @@ async function generateFish() {
     try {
         let response = await fetch("/api/generateFish", {
             method: "POST",
-            credentials: "include"
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                location: document.getElementById("location-select").value
+            })
         });
 
         fishData = await response.json();
@@ -242,6 +248,10 @@ function resetGame() {
     fishButton.disabled = false;
     startGame();
 }
+
+document.getElementById("location-select").addEventListener("change", function () {
+    resetGame();
+});
 
 
 async function startGame() {
