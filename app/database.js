@@ -38,6 +38,10 @@ db.prepare(
 ).run();
 
 db.prepare(
+	`CREATE TABLE IF NOT EXISTS market (id INTEGER PRIMARY KEY AUTOINCREMENT, user STRING, fish_id INT, weight INT, cost INT)`,
+).run();
+
+db.prepare(
 	`
 	CREATE TABLE IF NOT EXISTS magic_links (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,

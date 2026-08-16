@@ -229,6 +229,21 @@ app.post("/api/inventory", function (req, res) {
 	res.json(results);
 });
 
+app.post("/api/marketlist", function (req, res) {
+	if (!req.session.userId) {
+		return res.status(401).json({
+			error: "You must be logged in."
+		});
+	}
+
+	let results = db.prepare(`
+		SELECT *
+		FROM market
+	`).all();
+
+	res.json(results);
+});
+
 app.post("/api/register", function (req, res) {
 	let username =
 		typeof req.body.username === "string" ? req.body.username.trim() : "";
@@ -274,6 +289,27 @@ app.post("/api/register", function (req, res) {
 			error: "Something went wrong.",
 		});
 	}
+});
+
+app.post("/api/sell", function (req, res) {
+	if (!req.session.userId) {
+		return res.status(401).json({
+			error: "You must be logged in."
+		});
+	}
+
+	console.log(req.body.catch_id)
+	let sellInfo = db.prepare(`SELECT * FROM catches WHERE id = ?`).get(req.body.catch_id);
+	console.log(sellInfo);
+
+	let user = sellInfo.user;
+	let fish_id = sellInfo.fish_id;
+	let weight = sellInfo.weight;
+	let cost = req.body.cost;
+
+	db.prepare(`INSERT INTO market (user, fish_id, weight, cost) VALUES (?, ?, ?, ?)`).run(user, fish_id, weight, cost);
+	db.prepare(`DELETE FROM catches WHERE id = ?`).run(req.body.catch_id)
+	res.json();
 });
 
 app.get("/api/me", function (req, res) {

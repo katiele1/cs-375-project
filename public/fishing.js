@@ -2,7 +2,9 @@ let fishingArea = document.querySelector(".fishing");
 let bait = document.getElementById("bait");
 let fish = document.querySelector(".fishing .sea .fish");
 let progressBar = document.querySelector(".fishing .progress .bar");
+let sellButton = document.getElementById("sell-button");
 let fishButton = document.getElementById("fish-button");
+let marketButton = document.getElementById("market-button");
 let result = document.getElementById("result");
 
 
@@ -19,6 +21,14 @@ profileButton.addEventListener("click", function () {
 
 loginButton.addEventListener("click", function () {
 	location.href = "login.html";
+});
+
+sellButton.addEventListener("click", function () {
+	location.href = "sell.html";
+});
+
+marketButton.addEventListener("click", function () {
+	location.href = "market.html";
 });
 
 registerButton.addEventListener("click", function () {
@@ -228,7 +238,7 @@ async function catchFish() {
 			socket.send(JSON.stringify({
   				type: "catch",
                 lobby: currentLobby,
-  		  		text: `${caughtNoticeUser} just caught a ${fishData.name} (${fishData.weight} lbs)!`
+  		  		text: `${caughtNoticeUser} just caught a ${fishData.name} (${fishData.weight} kgs)!`
 			}));
         }
         } catch (error) {
@@ -287,34 +297,6 @@ function gameLoop() {
 
 startGame();
 gameLoop();
-
-/*
-fishButton.addEventListener("click", async function () {
-	try {
-		result.textContent = "Fishing...";
-
-		let response = await fetch("/api/fish", {
-			method: "POST",
-		});
-
-		let fish = await response.json();
-
-		if (!response.ok) {
-			throw new Error(fish.error);
-		}
-
-		result.textContent =
-			`You caught a ${fish.name}! ` +
-			`It weighs ${fish.weight} pounds and is worth ` +
-			`${fish.value} coins.`;
-		
-
-		}
-	} catch (error) {
-		result.textContent = error.message;
-	}
-});
-*/
 
 async function checkLoginStatus() {
 	try {
