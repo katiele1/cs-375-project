@@ -50,6 +50,7 @@ async function loadFish() {
 			let row = document.createElement("tr");
 
 			row.innerHTML = `
+				<td> <img class="fish-image" src="${fish.image}" alt="${fish.name}"> </td>
 				<td>${fish.name}</td>
 				<td>${fish.rarity}</td>
 				<td>${fish.weight}</td>

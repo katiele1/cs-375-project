@@ -184,10 +184,28 @@ app.post("/api/catchFish", function (req, res) {
         });
     }
 
-	db.prepare(`INSERT INTO catches (user, fish_id, weight, value) VALUES (?, ?, ?, ?)`).run
-	(user.username, fish.id, fish.avg_weight_kg, fish.cost);
+	db.prepare(`
+		INSERT INTO catches (user, fish_id, weight, value) 
+		VALUES (?, ?, ?, ?)
+	`).run(
+		user.username, 
+		fish.id, 
+		fish.avg_weight_kg, 
+		fish.cost
+	);
 
-	db.prepare(`UPDATE users SET experience = experience + ? WHERE id = ?`).run(10, req.session.userId); 
+	db.prepare(`
+		UPDATE users 
+		SET experience = experience + ?,
+			coins = coins + ?
+		WHERE id = ?
+	`).run(10, 5, req.session.userId); 
+
+	db.prepare(`
+		UPDATE users 
+		SET level = FLOOR(experience / 50) + 1 
+		WHERE id = ?
+	`).run(req.session.userId);
 	
 	res.json({
         message: "Fish caught!",
