@@ -15,6 +15,11 @@ let registerButton = document.getElementById("register-button");
 let currentUser = null;
 let profileButton = document.getElementById("profile-button");
 
+let bgMusic = new Audio("music.mp3");
+bgMusic.loop = true;
+bgMusic.volume = 0.5;
+
+
 profileButton.addEventListener("click", function () {
 	location.href = "profile.html";
 });
@@ -59,6 +64,9 @@ let fishDirection = 1;
 let gameRunning = false;
 
 fishButton.addEventListener("mousedown", () => {
+    bgMusic.play().catch(error => {
+        console.log("Playback failed:", error);
+    });
     holding = true;
 });
 
@@ -225,6 +233,8 @@ async function catchFish() {
         if (!response.ok) {
             throw new Error(data.error);
         }
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
 
         result.textContent =
             `You caught a ${fishData.name}! ` +
