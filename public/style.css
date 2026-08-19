@@ -1,46 +1,32 @@
-table {
-	width: 40%;
-	border-collapse: collapse;
-	margin: 20px 0;
-	font-size: 16px;
-	font-family: sans-serif;
-	min-width: 400px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-table th,
-table td {
-	padding: 12px 15px;
-	text-align: left;
-}
-
-table thead tr {
-	background-color: #1a73e8;
-	color: #ffffff;
-	font-weight: 600;
-}
-
-table tbody tr {
-	border-bottom: 1px solid #e0e0e0;
-}
-
-table tbody tr:hover {
-	background-color: #f1f3f4;
+* {
+	box-sizing: border-box;
 }
 
 body {
-	height: 100vh;
+	margin: 0;
+	min-height: 100vh;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #073b4c;
+
+	/* Underwater background */
+	background:
+		radial-gradient(
+			circle at 20% 20%,
+			rgba(255, 255, 255, 0.18),
+			transparent 25%
+		),
+		linear-gradient(180deg, #5ed9e8 0%, #21b4cf 25%, #087f9c 60%, #04364a 100%);
+
+	background-attachment: fixed;
 }
+
 .fishing {
-	position: absolute;
+	position: relative;
 	width: 121px;
 	height: 500px;
 	border-radius: 10px;
-	top: 50%;
-	left: 50%;
-	margin-top: -250px;
-	margin-left: -60px;
 }
+
 .fishing .rod {
 	width: 20px;
 	height: 100%;
@@ -48,6 +34,7 @@ body {
 	top: 0;
 	left: 0;
 }
+
 .fishing .rod:before {
 	content: "";
 	width: 3px;
@@ -65,6 +52,7 @@ body {
 	border: 1px solid #212529;
 	border-radius: 5px;
 }
+
 .fishing .rod:after {
 	content: "";
 	position: absolute;
@@ -88,6 +76,7 @@ body {
 		-3px 4px 14px -4px,
 		inset 2px -2px rgba(0, 0, 0, 0.2);
 }
+
 .fishing .rod .reel {
 	position: absolute;
 	width: 25px;
@@ -106,6 +95,7 @@ body {
 		inset 2px -2px rgba(0, 0, 0, 0.2);
 	border: 1px solid #67300a;
 }
+
 .fishing .rod .reel .handle {
 	content: "";
 	position: absolute;
@@ -130,6 +120,7 @@ body {
 	animation-timing-function: linear;
 	animation-play-state: paused;
 }
+
 @keyframes reelin {
 	from {
 		transform: rotate(360deg);
@@ -138,14 +129,17 @@ body {
 		transform: rotate(0deg);
 	}
 }
+
 .fishing .rod .reel .handle.reelin {
 	animation-play-state: running;
 }
+
 .fishing .rod .reel .handle.reelout {
 	animation-duration: 0.5s;
 	animation-direction: reverse;
 	animation-play-state: running;
 }
+
 .fishing .sea {
 	position: absolute;
 	width: 60px;
@@ -168,6 +162,7 @@ body {
 	padding: 10px;
 	box-sizing: border-box;
 }
+
 .fishing .sea:before {
 	content: "";
 	position: absolute;
@@ -187,6 +182,7 @@ body {
 	left: -12px;
 	z-index: -1;
 }
+
 .fishing .sea .area {
 	position: relative;
 	width: 100%;
@@ -203,6 +199,7 @@ body {
 	border: 2px solid #774936;
 	box-sizing: border-box;
 }
+
 .fishing .sea .fish {
 	width: 100%;
 	height: 50px;
@@ -216,6 +213,7 @@ body {
 	color: #264653;
 	text-shadow: 1px 1px #2a9d8f;
 }
+
 .fishing .sea .bait {
 	position: absolute;
 	width: 100%;
@@ -226,6 +224,7 @@ body {
 	border-radius: 10px;
 	box-shadow: inset 0 0 1px 3px #70ae6e;
 }
+
 .fishing .progress {
 	position: absolute;
 	width: 30px;
@@ -238,6 +237,7 @@ body {
 	padding: 3px;
 	box-sizing: border-box;
 }
+
 .fishing .progress .area {
 	position: relative;
 	width: 100%;
@@ -256,6 +256,7 @@ body {
 	overflow: hidden;
 	box-sizing: border-box;
 }
+
 .fishing .progress .bar {
 	position: absolute;
 	width: 100%;
@@ -266,12 +267,328 @@ body {
 	box-shadow: inset 2px -2px rgba(0, 0, 0, 0.4);
 	border-radius: 0 0 10px 10px;
 }
+
 .holdButtonProgress {
 	display: none;
+}
+
+.game-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 30px;
+
+	padding: 18px 40px;
+
+	background: rgba(4, 54, 74, 0.97);
+	color: white;
+
+	border-bottom: 2px solid #21d4d4;
+
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.game-header h1 {
+	margin: 0;
+	font-size: 30px;
+}
+
+.game-header #account-message {
+	margin: 6px 0 0;
+	font-size: 14px;
+	color: #c8f7ff;
+}
+
+.header-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+button {
+	padding: 11px 18px;
+	border: 1px solid #35e0dc;
+	border-radius: 9px;
+	background: linear-gradient(180deg, #13bcd3, #0797b3);
+	color: white;
+	font-family: inherit;
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+	box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
+	transition:
+		transform 0.15s ease,
+		box-shadow 0.15s ease,
+		filter 0.15s ease;
+}
+
+button:hover {
+	transform: translateY(-2px);
+	filter: brightness(1.08);
+	box-shadow: 0 5px 12px rgba(0, 0, 0, 0.22);
+}
+
+button:active {
+	transform: translateY(0);
+}
+
+button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	transform: none;
+}
+
+.game-stage {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 540px;
+	margin-top: 18px;
+	border: 2px solid #12cbd0;
+	border-radius: 15px;
+	background:
+		radial-gradient(
+			circle at 30% 10%,
+			rgba(255, 255, 255, 0.25),
+			transparent 30%
+		),
+		linear-gradient(180deg, #61d9e7 0%, #25b5cc 30%, #087f9c 65%, #07506b 100%);
+	box-shadow:
+		inset 0 0 35px rgba(255, 255, 255, 0.15),
+		0 5px 12px rgba(4, 54, 74, 0.2);
+	overflow: hidden;
+}
+
+.fishing-actions {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	margin-top: 18px;
+}
+
+#fish-button {
+	min-width: 100px;
+	background: linear-gradient(180deg, #2dbb75, #168c58);
+	border-color: #43d995;
+	font-size: 16px;
+}
+
+#fish-button:hover {
+	background: #247047;
+}
+
+#result {
+	margin: 0;
+	font-size: 14px;
+	font-weight: 600;
+	color: #073b4c;
+}
+
+button,
+select {
+	font: inherit;
+}
+
+.game-layout {
+	display: grid;
+	grid-template-columns:
+		minmax(550px, 2fr)
+		minmax(280px, 1fr);
+	gap: 22px;
+	width: min(1200px, calc(100% - 40px));
+	margin: 28px auto;
+}
+
+.game-panel,
+.lobby-panel,
+.inventory-panel {
+	background: rgba(238, 252, 255, 0.9);
+	border: 1px solid rgba(84, 222, 226, 0.75);
+	border-radius: 16px;
+	box-shadow:
+		0 8px 22px rgba(3, 46, 65, 0.2),
+		inset 0 1px rgba(255, 255, 255, 0.8);
+}
+
+.game-panel {
+	padding: 24px;
+}
+
+.lobby-panel {
+	padding: 24px;
+}
+
+.game-panel h2,
+.lobby-panel h2,
+.inventory-panel h2 {
+	color: #073b4c;
+}
+
+.lobby-panel h2 {
+	margin: 0 0 20px;
+}
+
+.panel-heading {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 25px;
+}
+
+.panel-heading h2 {
+	margin: 0;
+	font-size: 22px;
+}
+
+.panel-heading p {
+	margin: 8px 0 0;
+	color: #527789;
+	font-size: 14px;
+}
+
+.lobby-controls {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 10px;
+}
+
+#lobby-select {
+	padding: 11px 12px;
+	border: 1px solid #b2d7e2;
+	border-radius: 8px;
+	background: white;
+	color: #073b4c;
+	font-family: inherit;
+}
+
+select {
+	padding: 10px;
+	border: 1px solid #c5d8e5;
+	border-radius: 8px;
+	background: white;
+}
+
+#player-count {
+	display: inline-block;
+	margin-top: 18px;
+	padding: 7px 12px;
+	background: rgba(255, 255, 255, 0.65);
+	border-radius: 20px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #07506b;
+}
+
+#messages {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	max-height: 520px;
+	overflow-y: auto;
+}
+
+#messages li {
+	margin-bottom: 9px;
+	padding: 11px 13px;
+	background: rgba(255, 255, 255, 0.65);
+	border-radius: 8px;
+	color: #164b60;
+	font-size: 14px;
+}
+
+.inventory-panel {
+	width: min(1200px, calc(100% - 40px));
+	margin: 0 auto 40px;
+	padding: 24px;
+}
+
+.inventory-heading {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+}
+
+.inventory-heading h2 {
+	margin: 0;
+}
+
+.inventory-heading p {
+	margin: 8px 0 0;
+	color: #527789;
+	font-size: 14px;
+}
+
+.table-container {
+	width: 100%;
+	overflow-x: auto;
+}
+
+table {
+	width: 100%;
+	margin-top: 20px;
+	border-collapse: collapse;
+	background: rgba(255, 255, 255, 0.8);
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 3px 10px rgba(4, 54, 74, 0.12);
+}
+
+table th,
+table td {
+	padding: 12px 15px;
+	text-align: left;
+}
+
+table thead tr {
+	background: #087f9c;
+	color: white;
+}
+
+table tbody tr {
+	border-bottom: 1px solid #cde7ed;
+}
+
+table tbody tr:hover {
+	background-color: #ddf7fa;
 }
 
 table img {
 	width: 60px;
 	height: 60px;
 	object-fit: contain;
+}
+
+@media (max-width: 850px) {
+	.game-header {
+		flex-direction: column;
+		align-items: flex-start;
+
+		padding: 18px 20px;
+	}
+
+	.header-actions {
+		justify-content: flex-start;
+	}
+
+	.game-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.panel-heading {
+		flex-direction: column;
+	}
+
+	.lobby-controls {
+		justify-content: flex-start;
+		flex-wrap: wrap;
+	}
+
+	.inventory-heading {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 }

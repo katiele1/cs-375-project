@@ -8,68 +8,107 @@
 	</head>
 
 	<body>
-		<h1>Fishing Game</h1>
-			<button id="profile-button">Profile</button>
-			<button id="sell-button">Sell Fish on Market</button>
-			<button id="market-button">View Market</button>
-		<div>
-			<p></p>
-			<button id="fish-button">Fish</button>
-		</div>
-		<div class="fishing">
-			<div class="rod">
-				<div class="reel">
-					<div class="handle"></div>
-				</div>
+		<header class="game-header">
+			<div>
+				<h1>Fishing Game</h1>
+				<p id="account-message"></p>
 			</div>
-			<div class="sea">
-				<div class="area">
-					<div class="bait" id="bait"></div>
-					<div class="fish">🐟</div>
-				</div>
+
+			<div class="header-actions">
+				<button id="profile-button">Profile</button>
+				<button id="market-button">View Market</button>
+				<button id="sell-button">Sell Fish on Market</button>
+
+				<button id="login-button">Log In</button>
+				<button id="register-button">Create Account</button>
+				<button id="logout-button" hidden>Log Out</button>
 			</div>
-			<div class="progress">
-				<div class="area">
-					<div class="bar" style="height: 0%"></div>
+		</header>
+
+		<main class="game-layout">
+			<section class="game-panel">
+				<div class="panel-heading">
+					<div>
+						<h2>Fishing Spot</h2>
+						<p>Keep the fish inside the green zone to reel it in.</p>
+					</div>
+
+					<div class="lobby-controls">
+						<select id="lobby-select">
+							<option value="Salty Ocean Water">Salty Ocean Lobby</option>
+							<option value="Deep Ocean Water">Deep Ocean Lobby</option>
+							<option value="Fresh River Water">Fresh River Lobby</option>
+							<option value="Brackish Water">Brackish Water Lobby</option>
+						</select>
+
+						<button id="switch-lobby-button">Switch Lobby</button>
+					</div>
 				</div>
+
+				<div id="player-count">Players in lobby: 0</div>
+
+				<div class="game-stage">
+					<div class="fishing">
+						<div class="rod">
+							<div class="reel">
+								<div class="handle"></div>
+							</div>
+						</div>
+
+						<div class="sea">
+							<div class="area">
+								<div class="bait" id="bait"></div>
+								<div class="fish">🐟</div>
+							</div>
+						</div>
+
+						<div class="progress">
+							<div class="area">
+								<div class="bar" style="height: 0%"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="fishing-actions">
+					<button id="fish-button">Fish</button>
+					<p id="result"></p>
+				</div>
+			</section>
+
+			<aside class="lobby-panel">
+				<h2>Lobby Activity</h2>
+
+				<ul id="messages"></ul>
+			</aside>
+		</main>
+
+		<section class="inventory-panel">
+			<div class="inventory-heading">
+				<div>
+					<h2>Your Inventory</h2>
+					<p>View the fish you've caught.</p>
+				</div>
+
+				<button id="inventory-button">See Inventory</button>
 			</div>
-		</div>
-		<div id="account-area">
-			<p id="account-message"></p>
 
-			<button id="login-button">Log In</button>
-			<button id="register-button">Create Account</button>
+			<div class="table-container">
+				<table>
+					<thead>
+						<tr>
+							<th>Fish ID</th>
+							<th>Fish Name</th>
+							<th>Weight</th>
+							<th>Value</th>
+							<th>Location</th>
+						</tr>
+					</thead>
 
-			<button id="logout-button" hidden>Log Out</button>
-		</div>
-		<p id="result"></p>
-
-		<div>
-			<select id="lobby-select">
-				<option value="Salty Ocean Water">Salty Ocean Lobby</option>
-				<option value="Deep Ocean Water">Deep Ocean Lobby</option>
-				<option value="Fresh River Water">Fresh River Lobby</option>
-				<option value="Brackish Water">Brackish Water Lobby</option>
-			</select>
-			<button id="switch-lobby-button">Switch Lobby</button>
-			<div id="player-count">Players in lobby: 0</div>
-		</div>
-		<ul id="messages"></ul>
-
-		<button id="inventory-button">See Inventory</button>
-
-		<table>
-			<thead>
-				<tr>
-					<th>Fish ID</th>
-					<th>Fish Name</th>
-					<th>Weight</th>
-					<th>Value</th>
-					<th>Location</th>
-				</tr>
-			</thead>
-			<tbody id="inventory-table"></tbody>
-		</table>
+					<tbody id="inventory-table"></tbody>
+				</table>
+			</div>
+		</section>
 
 		<script src="websocket.js"></script>
 		<script src="fishing.js"></script>
