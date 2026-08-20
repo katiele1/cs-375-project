@@ -15,10 +15,60 @@ let registerButton = document.getElementById("register-button");
 let currentUser = null;
 let profileButton = document.getElementById("profile-button");
 
-let bgMusic = new Audio("music.mp3");
-bgMusic.loop = true;
-bgMusic.volume = 0.5;
+let fishAlmostCaughtSound = new Audio("audio/fish_almost_caught.wav");
+let completionSound = new Audio("audio/fish_caught.wav");
+let fishFlappingSound = new Audio("audio/fish_flapping.wav");
+let fishMovingSound = new Audio("audio/fish_moving.wav");
+let coinSound = new Audio("audio/coin_sound.wav");
+let gameMusic = new Audio("audio/game_music.wav");
 
+let MUSIC_STOP_DELAY = 10000;
+let GAME_MUSIC_VOLUME = 0.25;
+let GAME_MUSIC_OVERLAP_VOLUME = 0.1;
+let FISH_FLAP_VOLUME = 0.5;
+
+fishAlmostCaughtSound.volume = FISH_FLAP_VOLUME;
+completionSound.volume = FISH_FLAP_VOLUME;
+fishFlappingSound.volume = FISH_FLAP_VOLUME;
+fishMovingSound.volume = FISH_FLAP_VOLUME;
+coinSound.volume = FISH_FLAP_VOLUME;
+gameMusic.volume = GAME_MUSIC_VOLUME;
+gameMusic.loop = true;
+
+let flappingPlaying = false;
+let movingPlaying = false;
+let gameMusicPlaying = false;
+let almost70ProgressPlayed = false;
+
+let soundEffectsEnabled = true;
+let musicEnabled = true;
+let lastMusicActivity = Date.now();
+
+function playEffect(sound) {
+    if (!soundEffectsEnabled) return Promise.resolve();
+    return sound.play().catch(err => console.log('Playback failed:', err));
+}
+
+function playMusic(sound) {
+    if (!musicEnabled) return Promise.resolve();
+    return sound.play().catch(err => console.log('Playback failed:', err));
+}
+
+function setGameMusicOverlap(overlapped) {
+    if (!gameMusicPlaying || !musicEnabled) return;
+    gameMusic.volume = overlapped ? GAME_MUSIC_OVERLAP_VOLUME : GAME_MUSIC_VOLUME;
+}
+
+
+function startBackgroundMusic() {
+    if (!musicEnabled) return;
+    lastMusicActivity = Date.now();
+    if (!gameMusicPlaying) {
+        playMusic(gameMusic).then(() => {
+            gameMusicPlaying = true;
+        }).catch(() => {});
+    }
+}
 
 profileButton.addEventListener("click", function () {
 	location.href = "profile.html";
@@ -63,18 +113,45 @@ let holding = false;
 let fishDirection = 1;
 let gameRunning = false;
 
+function stopFishingSounds() {
+    if (flappingPlaying) {
+        fishFlappingSound.pause();
+        fishFlappingSound.currentTime = 0;
+        flappingPlaying = false;
+    }
+    if (movingPlaying) {
+        fishMovingSound.pause();
+        fishMovingSound.currentTime = 0;
+        movingPlaying = false;
+    }
+    setGameMusicOverlap(false);
+}
+
 fishButton.addEventListener("mousedown", () => {
-    bgMusic.play().catch(error => {
-        console.log("Playback failed:", error);
-    });
+    startBackgroundMusic();
     holding = true;
+    if (soundEffectsEnabled) {
+    if (!flappingPlaying) {
+            fishFlappingSound.loop = true;
+            fishFlappingSound.play().catch(err => console.log("Playback failed:", err));
+            flappingPlaying = true;
+        }
+        if (!movingPlaying) {
+            fishMovingSound.loop = true;
+            fishMovingSound.play().catch(err => console.log("Playback failed:", err));
+            movingPlaying = true;
+        }
+        setGameMusicOverlap(true);
+    }
 });
 
 fishButton.addEventListener("mouseup", () => {
+    stopFishingSounds();
     holding = false;
 });
 
 fishButton.addEventListener("mouseleave", () => {
+    stopFishingSounds();
     holding = false;
 });
 
@@ -168,6 +245,11 @@ function checkCollision() {
 
     let baitRect = bait.getBoundingClientRect();
     let fishRect = fish.getBoundingClientRect();
+    if (progress > 70 && !almost70ProgressPlayed) {
+            if (soundEffectsEnabled) fishAlmostCaughtSound.play().catch(err => 
+                console.log("Playback failed:", err));
+            almost70ProgressPlayed = true;
+        }
 
     return !(
         baitRect.right < fishRect.left ||
@@ -233,8 +315,12 @@ async function catchFish() {
         if (!response.ok) {
             throw new Error(data.error);
         }
-        bgMusic.pause();
-        bgMusic.currentTime = 0;
+        stopFishingSounds();
+
+        if (soundEffectsEnabled) {
+            completionSound.play().catch(err => console.log("Playback failed:", err));
+            coinSound.play().catch(err => console.log("Playback failed:", err));
+        }
 
         result.textContent =
             `You caught a ${fishData.name}! ` +
@@ -275,12 +361,42 @@ function resetGame() {
     result.textContent = "";
 
     fishButton.disabled = false;
+    stopFishingSounds();
+    almost70ProgressPlayed = false;
+    setGameMusicOverlap(false);
     startGame();
 }
 
 document.getElementById("lobby-select").addEventListener("change", function () {
     resetGame();
 });
+
+function setSoundToggles() {
+    let soundEffectToggle = document.getElementById('sound-effect-toggle');
+    let musicToggle = document.getElementById('music-toggle');
+
+    soundEffectToggle.checked = soundEffectsEnabled;
+    soundEffectToggle.addEventListener('change', () => {
+        soundEffectsEnabled = soundEffectToggle.checked;
+        if (!soundEffectsEnabled) stopFishingSounds();
+    });
+
+    musicToggle.checked = musicEnabled;
+    musicToggle.addEventListener('change', () => {
+        musicEnabled = musicToggle.checked;
+        if (!musicEnabled) {
+            if (gameMusicPlaying) {
+                gameMusic.pause();
+                gameMusic.currentTime = 0;
+                gameMusicPlaying = false;
+            }
+        } else {
+            startBackgroundMusic();
+        }
+    });
+}
+
+setSoundToggles();
 
 
 async function startGame() {
@@ -297,10 +413,27 @@ async function startGame() {
 
 function gameLoop() {
     if (gameRunning) {
+        if (holding) lastMusicActivity = Date.now();
         updateBait();
         updateFish();
         updateProgress();
         render();
+    }
+    else {
+        stopFishingSounds();
+    }
+     if (gameMusicPlaying && Date.now() - lastMusicActivity > MUSIC_STOP_DELAY) {
+        gameMusic.pause();
+        gameMusic.currentTime = 0;
+        gameMusicPlaying = false;
+    }
+
+    if (gameMusicPlaying) {
+        if (flappingPlaying || movingPlaying) {
+            setGameMusicOverlap(true);
+        } else {
+            setGameMusicOverlap(false);
+        }
     }
     requestAnimationFrame(gameLoop);
 }
