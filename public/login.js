@@ -1,6 +1,11 @@
 let form = document.getElementById("login-form");
 let message = document.getElementById("message");
+let backButton = document.getElementById("back-button");
 
+
+backButton.addEventListener("click", function () {
+	location.href = "index.html";
+});
 form.addEventListener("submit", async function (event) {
 	event.preventDefault();
 
