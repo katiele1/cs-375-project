@@ -12,7 +12,7 @@ let crypto = require("node:crypto");
 let nodemailer = require("nodemailer");
 
 let app = express();
-let hostname = "localhost";
+let hostname = "0.0.0.0";
 let port = 3000;
 
 let transporter = nodemailer.createTransport({
