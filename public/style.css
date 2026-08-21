@@ -1,14 +1,14 @@
 * {
 	box-sizing: border-box;
 }
-
 body {
 	margin: 0;
 	min-height: 100vh;
 	font-family: Arial, Helvetica, sans-serif;
 	color: #073b4c;
+	position: relative;
+	overflow-x: hidden;
 
-	/* Underwater background */
 	background:
 		radial-gradient(
 			circle at 20% 20%,
@@ -18,6 +18,64 @@ body {
 		linear-gradient(180deg, #5ed9e8 0%, #21b4cf 25%, #087f9c 60%, #04364a 100%);
 
 	background-attachment: fixed;
+}
+
+body::before {
+	content: "";
+
+	position: fixed;
+	inset: 0;
+
+	pointer-events: none;
+
+	background:
+		linear-gradient(
+			115deg,
+			transparent 0%,
+			rgba(255, 255, 255, 0.12) 15%,
+			transparent 30%
+		),
+		linear-gradient(
+			70deg,
+			transparent 0%,
+			rgba(255, 255, 255, 0.08) 18%,
+			transparent 35%
+		);
+
+	opacity: 0.7;
+
+	z-index: -1;
+}
+
+body::after {
+	content: "";
+
+	position: fixed;
+
+	width: 12px;
+	height: 12px;
+
+	left: 8%;
+	bottom: -30px;
+
+	border: 2px solid rgba(255, 255, 255, 0.45);
+	border-radius: 50%;
+
+	box-shadow:
+		120px -80px 0 -2px rgba(255, 255, 255, 0.3),
+		260px -200px 0 2px rgba(255, 255, 255, 0.25),
+		420px -60px 0 -1px rgba(255, 255, 255, 0.3),
+		610px -250px 0 3px rgba(255, 255, 255, 0.22),
+		800px -120px 0 1px rgba(255, 255, 255, 0.28),
+		1000px -300px 0 4px rgba(255, 255, 255, 0.2),
+		1250px -100px 0 -1px rgba(255, 255, 255, 0.3),
+		1450px -220px 0 2px rgba(255, 255, 255, 0.25);
+
+	animation: bubbles-rise 12s linear infinite;
+
+	pointer-events: none;
+
+	z-index: -1;
 }
 
 .fishing {
@@ -341,13 +399,18 @@ button:disabled {
 }
 
 .game-stage {
+	position: relative;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
 	min-height: 540px;
 	margin-top: 18px;
+
 	border: 2px solid #12cbd0;
 	border-radius: 15px;
+
 	background:
 		radial-gradient(
 			circle at 30% 10%,
@@ -355,10 +418,54 @@ button:disabled {
 			transparent 30%
 		),
 		linear-gradient(180deg, #61d9e7 0%, #25b5cc 30%, #087f9c 65%, #07506b 100%);
+
 	box-shadow:
 		inset 0 0 35px rgba(255, 255, 255, 0.15),
 		0 5px 12px rgba(4, 54, 74, 0.2);
+
 	overflow: hidden;
+}
+
+.game-stage::before,
+.game-stage::after {
+	content: "";
+
+	position: absolute;
+
+	width: 14px;
+	height: 14px;
+
+	border: 2px solid rgba(255, 255, 255, 0.35);
+	border-radius: 50%;
+
+	animation: stage-bubble 8s linear infinite;
+}
+
+.game-stage::before {
+	left: 18%;
+	bottom: -20px;
+}
+
+.game-stage::after {
+	right: 20%;
+	bottom: -30px;
+	animation-delay: 4s;
+}
+
+@keyframes stage-bubble {
+	0% {
+		transform: translateY(0) scale(0.8);
+		opacity: 0;
+	}
+
+	20% {
+		opacity: 1;
+	}
+
+	100% {
+		transform: translateY(-500px) scale(1.4);
+		opacity: 0;
+	}
 }
 
 .fishing-actions {
@@ -464,13 +571,6 @@ select {
 	font-family: inherit;
 }
 
-select {
-	padding: 10px;
-	border: 1px solid #c5d8e5;
-	border-radius: 8px;
-	background: white;
-}
-
 #player-count {
 	display: inline-block;
 	margin-top: 18px;
@@ -500,9 +600,29 @@ select {
 }
 
 .inventory-panel {
+	position: relative;
 	width: min(1200px, calc(100% - 40px));
 	margin: 0 auto 40px;
 	padding: 24px;
+}
+
+.inventory-panel::after {
+	content: "";
+
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -40px;
+
+	height: 70px;
+
+	background: radial-gradient(
+		ellipse at center,
+		rgba(232, 216, 176, 0.35),
+		rgba(6, 40, 61, 0)
+	);
+
+	pointer-events: none;
 }
 
 .inventory-heading {
@@ -593,7 +713,432 @@ table img {
 	}
 }
 
+@keyframes bubbles-rise {
+	from {
+		transform: translateY(0);
+	}
+
+	to {
+		transform: translateY(-110vh);
+	}
+}
+
+.underwater-scenery {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	overflow: hidden;
+}
+
+.background-fish {
+	position: absolute;
+	opacity: 0.65;
+	filter: saturate(0.8);
+	z-index: 1;
+}
+
+.fish-one {
+	font-size: 55px;
+	top: 25%;
+	left: 12%;
+	animation: swim-right 14s linear infinite;
+}
+
+.fish-two {
+	font-size: 45px;
+	top: 55%;
+	right: 15%;
+	animation: swim-left 18s linear infinite;
+}
+
+.fish-three {
+	font-size: 50px;
+	top: 75%;
+	left: 25%;
+	animation: swim-right 20s linear infinite;
+}
+
+@keyframes swim-right {
+	0% {
+		transform: translateX(-150px);
+	}
+
+	100% {
+		transform: translateX(700px);
+	}
+}
+
+@keyframes swim-left {
+	0% {
+		transform: scaleX(-1) translateX(-150px);
+	}
+
+	100% {
+		transform: scaleX(-1) translateX(700px);
+	}
+}
+
+.seaweed {
+	position: absolute;
+	bottom: -8px;
+
+	font-size: 55px;
+
+	transform-origin: bottom;
+
+	animation: seaweed-sway 3s ease-in-out infinite alternate;
+}
+
+.seaweed-one {
+	left: 5%;
+}
+
+.seaweed-two {
+	left: 18%;
+	font-size: 70px;
+	animation-delay: 0.7s;
+}
+
+.seaweed-three {
+	right: 15%;
+	font-size: 65px;
+	animation-delay: 1.2s;
+}
+
+.seaweed-four {
+	right: 4%;
+	font-size: 50px;
+	animation-delay: 0.3s;
+}
+
+@keyframes seaweed-sway {
+	from {
+		transform: rotate(-4deg);
+	}
+
+	to {
+		transform: rotate(4deg);
+	}
+}
+
+/* ==================================================
+   PROFILE PAGE
+   ================================================== */
+
+.profile-page {
+	width: min(1200px, calc(100% - 60px));
+	margin: 0 auto;
+	padding: 30px 0 60px;
+}
+
+/* BACK BUTTON */
+
+#back-button {
+	margin-bottom: 25px;
+}
+
+/* PROFILE TITLE */
+
+.profile-page h1 {
+	margin: 0 0 25px;
+
+	font-size: 38px;
+	font-weight: 700;
+	color: #073b4c;
+}
+
+/* Small aquatic decoration under title */
+
+.profile-page h1::after {
+	content: "〰〰〰";
+
+	display: block;
+
+	margin-top: 3px;
+
+	color: #00a8cc;
+	font-size: 22px;
+	letter-spacing: -5px;
+}
+
+/* PLAYER INFORMATION */
+
+.profile-info {
+	width: fit-content;
+	min-width: 350px;
+
+	margin-bottom: 40px;
+	padding: 20px 28px;
+
+	background: rgba(234, 251, 255, 0.35);
+
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	border-radius: 14px;
+
+	backdrop-filter: blur(4px);
+
+	box-shadow: 0 6px 18px rgba(4, 54, 74, 0.08);
+}
+
+.profile-info p {
+	margin: 0;
+	padding: 8px 0;
+
+	font-size: 18px;
+	line-height: 1.4;
+
+	color: #073b4c;
+}
+
+.profile-info strong {
+	display: inline-block;
+
+	min-width: 115px;
+
+	font-weight: 700;
+	color: #06283d;
+}
+
+/* CAUGHT FISH HEADING */
+
+.caught-fish-section {
+	margin-top: 10px;
+}
+
+.caught-fish-section h2 {
+	margin: 0 0 18px;
+
+	font-size: 30px;
+	color: #073b4c;
+}
+
+.caught-fish-section h2::after {
+	content: "〰〰";
+
+	display: block;
+
+	margin-top: 2px;
+
+	color: #00a8cc;
+	font-size: 20px;
+	letter-spacing: -4px;
+}
+
+/* PROFILE TABLE */
+
+.profile-table-container {
+	width: 100%;
+	max-width: 1050px;
+
+	margin: 0 auto;
+
+	overflow-x: auto;
+
+	border-radius: 14px;
+
+	box-shadow: 0 8px 22px rgba(4, 54, 74, 0.18);
+}
+
+.profile-table-container table {
+	width: 100%;
+	margin: 0;
+
+	background: rgba(238, 252, 255, 0.9);
+}
+
+/* More compact rows */
+
+#profile-fish-table td {
+	padding: 10px 16px;
+
+	font-size: 15px;
+	vertical-align: middle;
+}
+
+/* Smaller fish images */
+
+#profile-fish-table img {
+	width: 65px;
+	height: 50px;
+
+	object-fit: contain;
+
+	border-radius: 6px;
+}
+
+/* Profile table header */
+
+.profile-table-container thead tr {
+	background: linear-gradient(180deg, #087f9c, #066d88);
+}
+
+.profile-table-container th {
+	padding: 12px 16px;
+
+	font-size: 15px;
+}
+
+/* RESPONSIVE PROFILE */
+
+@media (max-width: 700px) {
+	.profile-page {
+		width: calc(100% - 30px);
+	}
+
+	.profile-page h1 {
+		font-size: 30px;
+	}
+
+	.profile-info {
+		width: 100%;
+		min-width: 0;
+	}
+
+	.profile-info p {
+		font-size: 16px;
+	}
+}
+
+.login-page {
+	min-height: 100vh;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 30px;
+}
+
+.login-card {
+	width: 100%;
+	max-width: 430px;
+
+	padding: 35px 40px;
+
+	background: rgba(238, 252, 255, 0.92);
+
+	border: 1px solid rgba(84, 222, 226, 0.8);
+	border-radius: 18px;
+
+	box-shadow:
+		0 12px 30px rgba(3, 46, 65, 0.25),
+		inset 0 1px rgba(255, 255, 255, 0.8);
+
+	backdrop-filter: blur(6px);
+}
+
+/* Back button */
+
+.login-card #back-button {
+	margin-bottom: 15px;
+}
+
+/* Fish icon */
+
+.login-icon {
+	margin-bottom: 5px;
+
+	text-align: center;
+	font-size: 45px;
+}
+
+/* Title */
+
+.login-card h1 {
+	margin: 0;
+
+	text-align: center;
+
+	font-size: 32px;
+	color: #073b4c;
+}
+
+/* Description */
+
+.login-description {
+	margin: 10px 0 25px;
+
+	text-align: center;
+
+	color: #527789;
+
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+/* Email label */
+
+#login-form label {
+	display: block;
+
+	margin-bottom: 7px;
+
+	color: #073b4c;
+
+	font-size: 14px;
+	font-weight: 700;
+}
+
+/* Email box */
+
+#login-form input {
+	width: 100%;
+
+	padding: 13px 14px;
+	margin-bottom: 16px;
+
+	border: 2px solid #b2dfe8;
+	border-radius: 9px;
+
+	background: white;
+
+	color: #073b4c;
+
+	font-family: inherit;
+	font-size: 16px;
+
+	outline: none;
+
+	transition:
+		border-color 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+#login-form input:focus {
+	border-color: #00a8cc;
+
+	box-shadow: 0 0 0 3px rgba(0, 168, 204, 0.15);
+}
+
+#login-form input::placeholder {
+	color: #8ba9b5;
+}
+
+/* Send Magic Link button */
+
+#login-form button {
+	width: 100%;
+
+	padding: 13px;
+
+	font-size: 16px;
+}
+
+/* Server response */
+
+.login-card #message {
+	min-height: 20px;
+
+	margin: 14px 0 0;
+
+	text-align: center;
+
+	color: #07506b;
+
+	font-size: 14px;
+}
+
 .sound-controls {
-    padding: 8px 8px;
-    font-size: 14px;
+	padding: 8px 8px;
+	font-size: 14px;
 }
