@@ -6,35 +6,60 @@
 		<link rel="stylesheet" href="style.css" />
 	</head>
 
-	<button id="back-button">Back to Game</button>
-
 	<body>
-		<h1>Player Profile</h1>
+		<main class="profile-page">
+			<button id="back-button">← Back to Game</button>
 
-		<p><strong>Username:</strong> <span id="username"></span></p>
-		<p><strong>Email:</strong> <span id="email"></span></p>
-		<p><strong>Coins:</strong> <span id="coins"></span></p>
-		<p><strong>Level:</strong> <span id="level"></span></p>
-		<p><strong>Experience:</strong> <span id="experience"></span></p>
+			<h1>Player Profile ⚓</h1>
 
-		<h2>Caught Fish</h2>
+			<div class="profile-info">
+				<p>
+					<strong>👤 Username:</strong>
+					<span id="username"></span>
+				</p>
 
-		<table>
-			<thead>
-				<tr>
-					<th>Image</th>
-					<th>Fish</th>
-					<th>Rarity</th>
-					<th>Weight</th>
-					<th>Value</th>
-					<th>Location</th>
-				</tr>
-			</thead>
+				<p>
+					<strong>✉️ Email:</strong>
+					<span id="email"></span>
+				</p>
 
-			<tbody id="profile-fish-table"></tbody>
-		</table>
+				<p>
+					<strong>🪙 Coins:</strong>
+					<span id="coins"></span>
+				</p>
 
-		
+				<p>
+					<strong>⭐ Level:</strong>
+					<span id="level"></span>
+				</p>
+
+				<p>
+					<strong>↗ Experience:</strong>
+					<span id="experience"></span>
+				</p>
+			</div>
+
+			<section class="caught-fish-section">
+				<h2>🐟 Caught Fish</h2>
+
+				<div class="profile-table-container">
+					<table>
+						<thead>
+							<tr>
+								<th>Image</th>
+								<th>Fish</th>
+								<th>Rarity</th>
+								<th>Weight</th>
+								<th>Value</th>
+								<th>Location</th>
+							</tr>
+						</thead>
+
+						<tbody id="profile-fish-table"></tbody>
+					</table>
+				</div>
+			</section>
+		</main>
 
 		<script src="profile.js"></script>
 	</body>

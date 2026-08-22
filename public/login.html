@@ -1,23 +1,40 @@
 <!doctype html>
 <html>
 	<head>
-    <meta charset="utf-8" />
-    <title>Log In</title>
-    <link rel="stylesheet" href="style.css" />
-</head>
+		<meta charset="utf-8" />
+		<title>Log In</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
 
 	<body>
-		<button id="back-button">Back to Game</button>
-		<h1>Log In</h1>
+		<main class="login-page">
+			<div class="login-card">
+				<button id="back-button">← Back to Game</button>
 
-		<form id="login-form">
-			<label for="email">Email:</label>
-			<input id="email" type="email" required />
+				<div class="login-icon">🐟</div>
 
-			<button type="submit">Send Magic Link</button>
-		</form>
+				<h1>Log In</h1>
 
-		<p id="message"></p>
+				<p class="login-description">
+					Enter your email and we'll send you a magic link to log in.
+				</p>
+
+				<form id="login-form">
+					<label for="email">Email Address</label>
+
+					<input
+						id="email"
+						type="email"
+						placeholder="you@example.com"
+						required
+					/>
+
+					<button type="submit">Send Magic Link</button>
+				</form>
+
+				<p id="message"></p>
+			</div>
+		</main>
 
 		<script src="login.js"></script>
 	</body>
