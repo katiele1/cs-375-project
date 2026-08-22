@@ -90,6 +90,15 @@ registerButton.addEventListener("click", function () {
 	location.href = "register.html";
 });
 
+document.getElementById("bait-upgrade")
+    .addEventListener("click", () => buyUpgrade("bait"));
+
+document.getElementById("float-upgrade")
+    .addEventListener("click", () => buyUpgrade("float"));
+
+document.getElementById("rod-upgrade")
+    .addEventListener("click", () => buyUpgrade("rod"));
+
 if (logoutButton) {
 	logoutButton.addEventListener("click", async function () {
 		await fetch("/api/logout", {
@@ -100,7 +109,8 @@ if (logoutButton) {
 	});
 }
 
-
+let rodPower = 0.25 + (currentUser.rodLevel - 1) * 0.03;
+let gravity = 0.01 - (currentUser.floatLevel - 1) * 0.0015;
 let baitPosition = 70;
 let baitVelocity = 0;
 let fishPosition = Math.random() * 70;
@@ -168,6 +178,7 @@ function initializeFishMovement(){
         fishSpeed = 0.35;
         catchSpeed = 0.2;
     }
+    catchSpeed  += ((currentUser.baitLevel - 1 ) * 0.02)
 }
 
 async function generateFish() {
@@ -199,10 +210,10 @@ async function generateFish() {
 function updateBait() {
     if (holding) {
         // Move upward
-        baitVelocity = -0.25;
+        baitVelocity = -rodPower;
     } else {
-        // Gravity pulls the bait downward
-        baitVelocity += 0.008;
+        // Gravity pulls the bait downward, adds a bit of float when releasing
+        baitVelocity += gravity;
     }
 
     // Limit falling speed
@@ -346,6 +357,50 @@ async function catchFish() {
     
 }
 
+async function buyUpgrade(upgrade) {
+    try {
+        let response = await fetch("/api/upgrade", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            credentials: "include",
+            body: JSON.stringify({upgrade: upgrade})
+        });
+
+        let data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error);
+        }
+
+        if (upgrade === "bait") {
+            currentUser.baitLevel = data.level;
+        }
+
+        if (upgrade === "float") {
+            currentUser.floatLevel = data.level;
+        }
+
+        if (upgrade === "reel") {
+            currentUser.rodLevel = data.level;
+        }
+
+        currentUser.coins = data.coins;
+
+        updateUpgradeDisplay();
+
+    } catch (error) {
+        alert(error.message);
+    }
+}
+
+function updateUpgradeDisplay() {
+    document.getElementById("bait-level").textContent =currentUser.baitLevel;
+
+    document.getElementById("float-level").textContent =currentUser.floatLevel;
+
+    document.getElementById("rod-level").textContent =currentUser.rodLevel;
+}
+
 
 function resetGame() {
     gameRunning = true;
@@ -452,6 +507,7 @@ async function checkLoginStatus() {
 			loginButton.hidden = true;
 			registerButton.hidden = true;
 			logoutButton.hidden = false;
+            updateUpgradeDisplay();
 		} else {
 			accountMessage.textContent = "You are playing anonymously.";
 			currentUser = null;

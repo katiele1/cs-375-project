@@ -1142,3 +1142,8 @@ table img {
 	padding: 8px 8px;
 	font-size: 14px;
 }
+
+.upgrades {
+	flex : 1;
+	padding : 20px;
+}

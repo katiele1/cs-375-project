@@ -150,6 +150,47 @@ app.post("/api/generateFish", function (req, res) {
 });
 });
 
+app.post("/api/upgrade", function (req, res) {
+    if (!req.session.userId) {
+        return res.status(401).json({error: "You must be logged in."});
+    }
+
+    let upgrade = req.body.upgrade;
+
+    let user = db.prepare(`SELECT coins, baitLevel, floatLevel, rodLevel FROM users WHERE id = ?`).get(req.session.userId);
+
+    if (!user) {
+        return res.status(401).json({error: "User not found."});
+    }
+    let column;
+
+    if (upgrade === "bait") {
+        column = "baitLevel";
+    } else if (upgrade === "float") {
+        column = "floatLevel";
+    } else if (upgrade === "rod") {
+        column = "reodLevel";
+    } else {
+        return res.status(400).json({error: "Invalid upgrade."});
+    }
+
+    let currentLevel = user[column];
+
+    let cost = currentLevel * 60;
+
+    if (user.coins < cost) {
+        return res.status(400).json({error: "Not enough coins."});
+    }
+    db.prepare(`UPDATE users SET coins = coins - ?, ${column} = ${column} + 1 WHERE id = ?`).run(cost,req.session.userId);
+
+    res.json({
+        message: "Upgrade purchased!",
+        upgrade: upgrade,
+        level: currentLevel + 1,
+        coins: user.coins - cost
+    });
+});
+
 
 app.post("/api/catchFish", function (req, res) {
 	if (!req.session.userId) {
@@ -390,7 +431,7 @@ app.get("/api/me", function (req, res) {
 	let user = db
 		.prepare(
 			`
-			SELECT id, username, email, coins, level, experience
+			SELECT id, username, email, coins, level, experience, baitLevel, floatLevel, rodLevel
 			FROM users
 			WHERE id = ?
 		`,
