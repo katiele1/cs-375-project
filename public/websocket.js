@@ -1,7 +1,7 @@
 let socket = null;
 
 function setupWebSocket() {
-    socket = new WebSocket('ws://localhost:8080');
+    socket = new WebSocket((location.protocol === "https:" ? "wss://" : "ws://") + location.host);
 
     socket.onopen = () => {
         let targetLobby = document.getElementById("lobby-select").value;

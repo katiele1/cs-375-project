@@ -3,8 +3,8 @@ require("dotenv").config({
 });
 
 let { WebSocketServer, WebSocket } = require("ws");
-let wss = new WebSocketServer({port: 8080})
-
+let http = require("http");
+let path = require("path");
 let express = require("express");
 let db = require("./database.js");
 let session = require("express-session");
@@ -12,8 +12,12 @@ let crypto = require("node:crypto");
 let nodemailer = require("nodemailer");
 
 let app = express();
-let hostname = "localhost";
-let port = 3000;
+app.set("trust proxy", 1);
+let server = http.createServer(app);
+let wss = new WebSocketServer({ server });
+
+let hostname = "0.0.0.0";
+let port = process.env.PORT || 3000;
 
 let transporter = nodemailer.createTransport({
 	service: "gmail",
@@ -31,13 +35,13 @@ app.use(
 		cookie: {
 			httpOnly: true,
 			sameSite: "lax",
-			secure: false,
+			secure: process.env.NODE_ENV === "production",
 		},
 	}),
 );
 
 app.use(express.json());
-app.use(express.static("../public"));
+app.use(express.static(path.join(__dirname, "../public")));
 
 wss.on('connection', (ws) => {
 	ws.username = "Someone"
@@ -555,6 +559,6 @@ app.post("/api/logout", function (req, res) {
 	});
 });
 
-app.listen(port, hostname, function () {
+server.listen(port, hostname, () => {
 	console.log(`http://${hostname}:${port}`);
 });
