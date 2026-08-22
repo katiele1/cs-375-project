@@ -262,6 +262,56 @@ app.post("/api/marketlist", function (req, res) {
 	res.json(results);
 });
 
+app.post("/api/buymarket", function (req, res) {
+	if (!req.session.userId) {
+		return res.status(401).json({
+			error: "You must be logged in."
+		});
+	}
+	
+	let buyerUser = db.prepare(`SELECT username, coins FROM users WHERE id = ?`).get(req.session.userId);
+
+	if (!buyerUser) {
+		return res.status(401).json({error: "Buyer profile not found."})
+	}
+
+	let {fish_id, seller} = req.body;
+
+	if (!fish_id || !seller) {
+		return res.status(400).json({error: "Missing required listing data."})
+	}
+
+	let executePurchase = db.transaction(() => {
+		let listing = db.prepare(`SELECT cost, weight FROM market WHERE user = ? AND fish_id = ?`).get(seller, fish_id);
+
+		if (!listing) {
+			throw new Error("This fish is no longer avilable on the market.");
+		}
+
+		if (buyerUser.username === seller) {
+			throw new Error("You cannot buy your own fish listing.");
+		}
+
+		if (buyerUser.coins < listing.cost) {
+			throw new Error("You do not have enough coins to purchase this fish.")
+		}
+		
+		db.prepare(`UPDATE users SET coins = coins - ? WHERE username = ?`).run(listing.cost, buyerUser.username)
+		db.prepare(`UPDATE users SET coins = coins + ? WHERE username = ?`).run(listing.cost, seller);
+		db.prepare(`INSERT INTO catches (user, fish_id, weight, value) VALUES (?,?,?,?)`).run(buyerUser.username, fish_id, listing.weight, listing.cost);
+		db.prepare(`DELETE FROM market WHERE user = ? and fish_id = ?`).run(seller, fish_id);
+
+		return {success: true};
+	});
+
+	try {
+		executePurchase();
+		res.json({message: "Fish purchased successfully!"});
+	} catch (error) {
+		res.status(400).json({error: error.message});
+	}
+});
+
 app.post("/api/register", function (req, res) {
 	let username =
 		typeof req.body.username === "string" ? req.body.username.trim() : "";
