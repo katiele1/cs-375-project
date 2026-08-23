@@ -7,6 +7,8 @@ let result = document.getElementById("result");
 
 let rodPower = 0.25;
 let gravity = 0.01;
+let weatherDisplay = document.getElementById("weather-display");
+
 let baitPosition = 70;
 let baitVelocity = 0;
 let fishPosition = Math.random() * 70;
@@ -266,8 +268,9 @@ function resetGame() {
     startGame();
 }
 
-document.getElementById("lobby-select").addEventListener("change", function () {
+document.getElementById("switch-lobby-button").addEventListener("click", function () {
     resetGame();
+	updateWeather();
 });
 
 async function startGame() {
@@ -309,3 +312,41 @@ function gameLoop() {
 }
 
 gameLoop();
+
+async function updateWeather() {
+    let location = document.getElementById("lobby-select").value;
+
+    switch (location) {
+        case "Salty Ocean Water":
+            location = "Ocean City, Maryland";
+            break;
+        case "Deep Ocean Water":
+            location = "Belize City, Belize";
+            break;
+        case "Fresh River Water":
+            location = "Milford, Pennsylvania";
+            break;
+        case "Brackish Water":
+            location = "Barnegat Bay, New Jersey";
+            break;
+    }
+
+    try {
+        let response = await fetch(
+            `/api/weather?location=${encodeURIComponent(location)}`
+        );
+
+        let data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error);
+        }
+
+        weatherDisplay.firstChild.textContent = `${location} Weather: ${data.condition}`;
+    } catch (error) {
+        weatherDisplay.firstChild.textContent = "Weather: Unavailable";
+        console.error(error);
+    }
+}
+
+updateWeather();

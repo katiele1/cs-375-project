@@ -16,7 +16,7 @@ app.set("trust proxy", 1);
 let server = http.createServer(app);
 let wss = new WebSocketServer({ server });
 
-let hostname = "0.0.0.0";
+let hostname = "localhost";
 let port = process.env.PORT || 3000;
 
 let transporter = nodemailer.createTransport({
@@ -592,6 +592,33 @@ app.get("/api/verify-magic-link", function (req, res) {
 		res.redirect("/");
 	});
 });
+
+app.get(`/api/weather`, async (req, res) => {
+	let location = req.query.location;
+	if (!location) {
+		return res.status(400).json({error: "Location is required"});
+	}
+
+	try {
+		let apiKey = process.env.WEATHER_API_KEY;
+		let url =
+			`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(location)}&units=metric&appid=${apiKey}`;
+
+		let response = await fetch(url);
+		let data = await response.json();
+
+		if (!response.ok) {
+			throw new Error(data.message || "Failed to fetch weather");
+		}
+
+		res.json({
+			condition: data.weather[0].main
+		})
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({error: error.message})
+	}
+})
 
 app.post("/api/logout", function (req, res) {
 	req.session.destroy(function (error) {
