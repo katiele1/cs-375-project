@@ -1155,6 +1155,349 @@ table img {
 }
 
 .upgrades {
-	flex : 1;
-	padding : 20px;
+	flex: 1;
+	padding: 20px;
+}
+
+.register-page {
+	min-height: 100vh;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 30px;
+}
+
+.register-card {
+	width: 100%;
+	max-width: 430px;
+
+	padding: 35px 40px;
+
+	background: rgba(238, 252, 255, 0.92);
+
+	border: 1px solid rgba(84, 222, 226, 0.8);
+	border-radius: 18px;
+
+	box-shadow:
+		0 12px 30px rgba(3, 46, 65, 0.25),
+		inset 0 1px rgba(255, 255, 255, 0.8);
+
+	backdrop-filter: blur(6px);
+}
+
+.register-card #back-button {
+	margin-bottom: 15px;
+}
+
+.register-icon {
+	margin-bottom: 5px;
+
+	text-align: center;
+	font-size: 45px;
+}
+
+.register-card h1 {
+	margin: 0;
+
+	text-align: center;
+
+	font-size: 32px;
+	color: #073b4c;
+}
+
+.register-description {
+	margin: 10px 0 25px;
+
+	text-align: center;
+
+	color: #527789;
+
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+#register-form label {
+	display: block;
+
+	margin-bottom: 7px;
+
+	color: #073b4c;
+
+	font-size: 14px;
+	font-weight: 700;
+}
+
+#register-form input {
+	width: 100%;
+
+	padding: 13px 14px;
+	margin-bottom: 16px;
+
+	border: 2px solid #b2dfe8;
+	border-radius: 9px;
+
+	background: white;
+
+	color: #073b4c;
+
+	font-family: inherit;
+	font-size: 16px;
+
+	outline: none;
+
+	transition:
+		border-color 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+#register-form input:focus {
+	border-color: #00a8cc;
+
+	box-shadow: 0 0 0 3px rgba(0, 168, 204, 0.15);
+}
+
+#register-form input::placeholder {
+	color: #8ba9b5;
+}
+
+#register-form button {
+	width: 100%;
+
+	padding: 13px;
+
+	font-size: 16px;
+}
+
+.register-card #message {
+	min-height: 20px;
+
+	margin: 14px 0 0;
+
+	text-align: center;
+
+	color: #07506b;
+
+	font-size: 14px;
+}
+
+.sell-page {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 40px;
+}
+
+.sell-market {
+	width: min(850px, 100%);
+
+	background: rgba(238, 252, 255, 0.94);
+
+	border: 1px solid #42d5dc;
+	border-radius: 20px;
+
+	overflow: hidden;
+
+	box-shadow: 0 15px 35px rgba(3, 46, 65, 0.3);
+}
+
+/* Top section */
+
+.sell-market-header {
+	display: flex;
+	align-items: center;
+	gap: 25px;
+
+	padding: 22px 28px;
+
+	background: #064b63;
+	color: white;
+}
+
+.sell-market-header h1 {
+	margin: 0;
+	font-size: 30px;
+}
+
+.sell-market-header p {
+	margin: 5px 0 0;
+	color: #c8f7ff;
+	font-size: 14px;
+}
+
+.sell-market-header #back-button {
+	flex-shrink: 0;
+}
+
+/* Two-column layout */
+
+.sell-market-content {
+	display: grid;
+	grid-template-columns: 1fr 1.25fr;
+}
+
+/* Fish selection side */
+
+.sell-fish-side {
+	padding: 35px;
+
+	background: linear-gradient(180deg, #087f9c, #07506b);
+
+	color: white;
+}
+
+.sell-fish-icon {
+	font-size: 70px;
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.sell-fish-side h2 {
+	margin: 0 0 25px;
+	text-align: center;
+}
+
+.sell-fish-side label {
+	display: block;
+	margin-bottom: 8px;
+
+	font-size: 14px;
+	font-weight: bold;
+
+	color: #d7faff;
+}
+
+#sell-dropdown {
+	width: 100%;
+
+	padding: 13px;
+
+	border: none;
+	border-radius: 9px;
+
+	font: inherit;
+
+	color: #073b4c;
+	background: white;
+}
+
+/* Price side */
+
+.sell-price-side {
+	padding: 35px 40px;
+}
+
+.sell-price-side h2 {
+	margin: 0 0 25px;
+
+	color: #073b4c;
+	font-size: 24px;
+}
+
+.sell-price-side label {
+	display: block;
+
+	margin-bottom: 8px;
+
+	color: #073b4c;
+
+	font-size: 14px;
+	font-weight: bold;
+}
+
+/* Coin + input */
+
+.coin-input {
+	display: flex;
+	align-items: center;
+
+	border: 2px solid #b2dfe8;
+	border-radius: 10px;
+
+	background: white;
+
+	overflow: hidden;
+}
+
+.coin-input span {
+	padding: 0 14px;
+
+	font-size: 22px;
+}
+
+.coin-input input {
+	flex: 1;
+
+	padding: 14px 14px 14px 0;
+
+	border: none;
+	outline: none;
+
+	font: inherit;
+	font-size: 17px;
+
+	color: #073b4c;
+}
+
+/* Hint */
+
+.sell-hint {
+	margin: 10px 0 25px;
+
+	color: #668794;
+
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+/* Main action */
+
+#list-button {
+	width: 100%;
+
+	padding: 14px;
+
+	background: linear-gradient(180deg, #e6a23c, #c98116);
+
+	border-color: #efbd69;
+
+	font-size: 16px;
+}
+
+#list-button:hover {
+	background: #b87312;
+}
+
+#sell-message {
+	min-height: 20px;
+
+	margin: 15px 0 0;
+
+	text-align: center;
+
+	color: #07506b;
+
+	font-size: 14px;
+}
+
+@media (max-width: 700px) {
+	.sell-page {
+		padding: 20px;
+	}
+
+	.sell-market-content {
+		grid-template-columns: 1fr;
+	}
+
+	.sell-market-header {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
+	.sell-fish-side,
+	.sell-price-side {
+		padding: 28px;
+	}
 }

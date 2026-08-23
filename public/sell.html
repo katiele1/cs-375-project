@@ -1,29 +1,62 @@
 <!doctype html>
 <html>
 	<head>
-    <meta charset="utf-8" />
-    <title>Sell A Fish</title>
-    <link rel="stylesheet" href="style.css" />
-</head>
+		<meta charset="utf-8" />
+		<title>Sell A Fish</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
 
 	<body>
+		<main class="sell-page">
+			<div class="sell-market">
+				<div class="sell-market-header">
+					<button id="back-button">← Back to Game</button>
 
-		<button id="back-button">Back to Game</button>
-		<h1>Sell A Fish</h1>
+					<div>
+						<h1>Fish Market</h1>
+						<p>List one of your catches for other players to buy.</p>
+					</div>
+				</div>
 
-		<div>
-			<label for="sell-value">Sell For:</label>
-			<input type="number" min="1" max="9999" id="sell-value" type="text" required />
-			<select id="sell-dropdown"></select>
-			<p></p>
-		</div>
+				<div class="sell-market-content">
+					<section class="sell-fish-side">
+						<div class="sell-fish-icon">🐟</div>
 
-		<div>
-			<button id="list-button">List on Market</button>
-		</div>
+						<h2>Choose a Catch</h2>
 
-		<p id="sell-message"></p>
+						<label for="sell-dropdown">Fish from Inventory</label>
+						<select id="sell-dropdown"></select>
+					</section>
 
+					<section class="sell-price-side">
+						<h2>Set Your Price</h2>
+
+						<label for="sell-value">Selling Price</label>
+
+						<div class="coin-input">
+							<span>🪙</span>
+
+							<input
+								type="number"
+								min="1"
+								max="9999"
+								id="sell-value"
+								placeholder="Enter price"
+								required
+							/>
+						</div>
+
+						<p class="sell-hint">
+							Choose a fair price based on the fish's rarity and value.
+						</p>
+
+						<button id="list-button">List on Market</button>
+
+						<p id="sell-message"></p>
+					</section>
+				</div>
+			</div>
+		</main>
 
 		<script src="sell.js"></script>
 	</body>
