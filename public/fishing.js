@@ -6,7 +6,7 @@ let sellButton = document.getElementById("sell-button");
 let fishButton = document.getElementById("fish-button");
 let marketButton = document.getElementById("market-button");
 let result = document.getElementById("result");
-
+let weatherDisplay = document.getElementById("weather-display");
 
 let logoutButton = document.getElementById("logout-button");
 let accountMessage = document.getElementById("account-message");
@@ -109,8 +109,8 @@ if (logoutButton) {
 	});
 }
 
-let rodPower = 0.25 + (currentUser.rodLevel - 1) * 0.03;
-let gravity = 0.01 - (currentUser.floatLevel - 1) * 0.0015;
+let rodPower = 0.25 //+ (currentUser.rodLevel - 1) * 0.03;
+let gravity = 0.01 //- (currentUser.floatLevel - 1) * 0.0015;
 let baitPosition = 70;
 let baitVelocity = 0;
 let fishPosition = Math.random() * 70;
@@ -422,8 +422,9 @@ function resetGame() {
     startGame();
 }
 
-document.getElementById("lobby-select").addEventListener("change", function () {
+document.getElementById("switch-lobby-button").addEventListener("click", function () {
     resetGame();
+	updateWeather();
 });
 
 function setSoundToggles() {
@@ -525,5 +526,42 @@ async function checkLoginStatus() {
 	}
 }
 
+async function updateWeather() {
+    let location = document.getElementById("lobby-select").value;
+
+    switch (location) {
+        case "Salty Ocean Water":
+            location = "Ocean City, Maryland";
+            break;
+        case "Deep Ocean Water":
+            location = "Belize City, Belize";
+            break;
+        case "Fresh River Water":
+            location = "Milford, Pennsylvania";
+            break;
+        case "Brackish Water":
+            location = "Barnegat Bay, New Jersey"
+            break;
+    }
+
+    try {
+        let response = await fetch(
+            `/api/weather?location=${encodeURIComponent(location)}`
+        );
+
+        let data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error);
+        }
+
+        weatherDisplay.firstChild.textContent = `${location} Weather: ${data.condition}`;
+    } catch (error) {
+        weatherDisplay.firstChild.textContent = "Weather: Unavailable";
+        console.error(error);
+    }
+}
+
 
 checkLoginStatus();
+updateWeather();
