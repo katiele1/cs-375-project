@@ -2,115 +2,11 @@ let fishingArea = document.querySelector(".fishing");
 let bait = document.getElementById("bait");
 let fish = document.querySelector(".fishing .sea .fish");
 let progressBar = document.querySelector(".fishing .progress .bar");
-let sellButton = document.getElementById("sell-button");
 let fishButton = document.getElementById("fish-button");
-let marketButton = document.getElementById("market-button");
 let result = document.getElementById("result");
 
-
-let logoutButton = document.getElementById("logout-button");
-let accountMessage = document.getElementById("account-message");
-let loginButton = document.getElementById("login-button");
-let registerButton = document.getElementById("register-button");
-let currentUser = null;
-let profileButton = document.getElementById("profile-button");
-
-let fishAlmostCaughtSound = new Audio("audio/fish_almost_caught.wav");
-let completionSound = new Audio("audio/fish_caught.wav");
-let fishFlappingSound = new Audio("audio/fish_flapping.wav");
-let fishMovingSound = new Audio("audio/fish_moving.wav");
-let coinSound = new Audio("audio/coin_sound.wav");
-let gameMusic = new Audio("audio/game_music.wav");
-
-let MUSIC_STOP_DELAY = 10000;
-let GAME_MUSIC_VOLUME = 0.25;
-let GAME_MUSIC_OVERLAP_VOLUME = 0.1;
-let FISH_FLAP_VOLUME = 0.5;
-
-fishAlmostCaughtSound.volume = FISH_FLAP_VOLUME;
-completionSound.volume = FISH_FLAP_VOLUME;
-fishFlappingSound.volume = FISH_FLAP_VOLUME;
-fishMovingSound.volume = FISH_FLAP_VOLUME;
-coinSound.volume = FISH_FLAP_VOLUME;
-gameMusic.volume = GAME_MUSIC_VOLUME;
-gameMusic.loop = true;
-
-let flappingPlaying = false;
-let movingPlaying = false;
-let gameMusicPlaying = false;
-let almost70ProgressPlayed = false;
-
-let soundEffectsEnabled = true;
-let musicEnabled = true;
-let lastMusicActivity = Date.now();
-
-function playEffect(sound) {
-    if (!soundEffectsEnabled) return Promise.resolve();
-    return sound.play().catch(err => console.log('Playback failed:', err));
-}
-
-function playMusic(sound) {
-    if (!musicEnabled) return Promise.resolve();
-    return sound.play().catch(err => console.log('Playback failed:', err));
-}
-
-function setGameMusicOverlap(overlapped) {
-    if (!gameMusicPlaying || !musicEnabled) return;
-    gameMusic.volume = overlapped ? GAME_MUSIC_OVERLAP_VOLUME : GAME_MUSIC_VOLUME;
-}
-
-
-function startBackgroundMusic() {
-    if (!musicEnabled) return;
-    lastMusicActivity = Date.now();
-    if (!gameMusicPlaying) {
-        playMusic(gameMusic).then(() => {
-            gameMusicPlaying = true;
-        }).catch(() => {});
-    }
-}
-
-profileButton.addEventListener("click", function () {
-	location.href = "profile.html";
-});
-
-loginButton.addEventListener("click", function () {
-	location.href = "login.html";
-});
-
-sellButton.addEventListener("click", function () {
-	location.href = "sell.html";
-});
-
-marketButton.addEventListener("click", function () {
-	location.href = "market.html";
-});
-
-registerButton.addEventListener("click", function () {
-	location.href = "register.html";
-});
-
-document.getElementById("bait-upgrade")
-    .addEventListener("click", () => buyUpgrade("bait"));
-
-document.getElementById("float-upgrade")
-    .addEventListener("click", () => buyUpgrade("float"));
-
-document.getElementById("rod-upgrade")
-    .addEventListener("click", () => buyUpgrade("rod"));
-
-if (logoutButton) {
-	logoutButton.addEventListener("click", async function () {
-		await fetch("/api/logout", {
-			method: "POST",
-		});
-
-		location.reload();
-	});
-}
-
-let rodPower = 0.25 + (currentUser.rodLevel - 1) * 0.03;
-let gravity = 0.01 - (currentUser.floatLevel - 1) * 0.0015;
+let rodPower = 0.25;
+let gravity = 0.01;
 let baitPosition = 70;
 let baitVelocity = 0;
 let fishPosition = Math.random() * 70;
@@ -122,19 +18,16 @@ let progress = 0;
 let holding = false;
 let fishDirection = 1;
 let gameRunning = false;
+let almost70ProgressPlayed = false;
 
-function stopFishingSounds() {
-    if (flappingPlaying) {
-        fishFlappingSound.pause();
-        fishFlappingSound.currentTime = 0;
-        flappingPlaying = false;
-    }
-    if (movingPlaying) {
-        fishMovingSound.pause();
-        fishMovingSound.currentTime = 0;
-        movingPlaying = false;
-    }
-    setGameMusicOverlap(false);
+function updateFishingStats() {
+	if (!window.currentUser) {
+		return;
+	}
+
+	rodPower = 0.25 + (window.currentUser.rodLevel - 1) * 0.03;
+
+	gravity = 0.01 - (window.currentUser.floatLevel - 1) * 0.0015;
 }
 
 fishButton.addEventListener("mousedown", () => {
@@ -178,7 +71,7 @@ function initializeFishMovement(){
         fishSpeed = 0.35;
         catchSpeed = 0.2;
     }
-    catchSpeed  += ((currentUser.baitLevel - 1 ) * 0.02)
+    catchSpeed  += ((window.currentUser.baitLevel - 1 ) * 0.02)
 }
 
 async function generateFish() {
@@ -207,6 +100,7 @@ async function generateFish() {
         return false;
     }
 }
+
 function updateBait() {
     if (holding) {
         // Move upward
@@ -236,7 +130,6 @@ function updateBait() {
     }
 }
 
-
 function updateFish() {
 
     fishPosition += fishDirection * fishSpeed;
@@ -253,7 +146,6 @@ function updateFish() {
 }
 
 function checkCollision() {
-
     let baitRect = bait.getBoundingClientRect();
     let fishRect = fish.getBoundingClientRect();
     if (progress > 70 && !almost70ProgressPlayed) {
@@ -270,9 +162,7 @@ function checkCollision() {
     );
 }
 
-
 function updateProgress() {
-
     if (checkCollision()) {
         progress += catchSpeed;
     } else {
@@ -296,16 +186,15 @@ function updateProgress() {
 }
 
 function render() {
-
     bait.style.top = baitPosition + "%";
     fish.style.top = fishPosition + "%";
-
 }
 
 async function catchFish() {
     if (!gameRunning) {
         return;
     }
+
     gameRunning = false;
     holding = false;
     fishButton.disabled = true;
@@ -339,7 +228,7 @@ async function catchFish() {
             `${fishData.value} coins.`;
 
 		if (socket && socket.readyState === WebSocket.OPEN) {
-			let caughtNoticeUser = currentUser ? currentUser.username : "Someone";
+			let caughtNoticeUser = window.currentUser ? window.currentUser.username : "Someone";
             let currentLobby = document.getElementById("lobby-select").value;
 
 			socket.send(JSON.stringify({
@@ -356,51 +245,6 @@ async function catchFish() {
         setTimeout(resetGame, 2000);
     
 }
-
-async function buyUpgrade(upgrade) {
-    try {
-        let response = await fetch("/api/upgrade", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            credentials: "include",
-            body: JSON.stringify({upgrade: upgrade})
-        });
-
-        let data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.error);
-        }
-
-        if (upgrade === "bait") {
-            currentUser.baitLevel = data.level;
-        }
-
-        if (upgrade === "float") {
-            currentUser.floatLevel = data.level;
-        }
-
-        if (upgrade === "reel") {
-            currentUser.rodLevel = data.level;
-        }
-
-        currentUser.coins = data.coins;
-
-        updateUpgradeDisplay();
-
-    } catch (error) {
-        alert(error.message);
-    }
-}
-
-function updateUpgradeDisplay() {
-    document.getElementById("bait-level").textContent =currentUser.baitLevel;
-
-    document.getElementById("float-level").textContent =currentUser.floatLevel;
-
-    document.getElementById("rod-level").textContent =currentUser.rodLevel;
-}
-
 
 function resetGame() {
     gameRunning = true;
@@ -426,34 +270,6 @@ document.getElementById("lobby-select").addEventListener("change", function () {
     resetGame();
 });
 
-function setSoundToggles() {
-    let soundEffectToggle = document.getElementById('sound-effect-toggle');
-    let musicToggle = document.getElementById('music-toggle');
-
-    soundEffectToggle.checked = soundEffectsEnabled;
-    soundEffectToggle.addEventListener('change', () => {
-        soundEffectsEnabled = soundEffectToggle.checked;
-        if (!soundEffectsEnabled) stopFishingSounds();
-    });
-
-    musicToggle.checked = musicEnabled;
-    musicToggle.addEventListener('change', () => {
-        musicEnabled = musicToggle.checked;
-        if (!musicEnabled) {
-            if (gameMusicPlaying) {
-                gameMusic.pause();
-                gameMusic.currentTime = 0;
-                gameMusicPlaying = false;
-            }
-        } else {
-            startBackgroundMusic();
-        }
-    });
-}
-
-setSoundToggles();
-
-
 async function startGame() {
     let success = await generateFish();
 
@@ -464,7 +280,6 @@ async function startGame() {
     gameRunning = true;
 
 }
-
 
 function gameLoop() {
     if (gameRunning) {
@@ -493,37 +308,4 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
-startGame();
 gameLoop();
-
-async function checkLoginStatus() {
-	try {
-		let response = await fetch("/api/me");
-		let data = await response.json();
-
-		if (response.ok && data.loggedIn) {
-			accountMessage.textContent = `Logged in as ${data.user.username}`;
-			currentUser = data.user;
-			loginButton.hidden = true;
-			registerButton.hidden = true;
-			logoutButton.hidden = false;
-            updateUpgradeDisplay();
-		} else {
-			accountMessage.textContent = "You are playing anonymously.";
-			currentUser = null;
-			loginButton.hidden = false;
-			registerButton.hidden = false;
-			logoutButton.hidden = true;
-		}
-	} catch (error) {
-		accountMessage.textContent = "Could not check login status.";
-		currentUser = null;
-	}
-
-	if (typeof setupWebSocket === "function") {
-		setupWebSocket();
-	}
-}
-
-
-checkLoginStatus();

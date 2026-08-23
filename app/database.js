@@ -15,9 +15,10 @@ db.prepare(
 		coins INTEGER NOT NULL DEFAULT 0,
 		level INTEGER NOT NULL DEFAULT 1,
 		experience INTEGER NOT NULL DEFAULT 0,
-		baitLevel INTEGER NOT NULL DEFAULT 1
-		floatLevel INTEGER NOT NULL DEFAULT 1
-		rodLevel INTEGER NOT NULL DEFAULT 1)`,
+		baitLevel INTEGER NOT NULL DEFAULT 1,
+		floatLevel INTEGER NOT NULL DEFAULT 1,
+		rodLevel INTEGER NOT NULL DEFAULT 1
+	)`,
 ).run();
 
 db.prepare(`

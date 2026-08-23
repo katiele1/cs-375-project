@@ -173,7 +173,7 @@ app.post("/api/upgrade", function (req, res) {
     } else if (upgrade === "float") {
         column = "floatLevel";
     } else if (upgrade === "rod") {
-        column = "reodLevel";
+        column = "rodLevel";
     } else {
         return res.status(400).json({error: "Invalid upgrade."});
     }
@@ -557,7 +557,7 @@ app.get("/api/verify-magic-link", function (req, res) {
 			SELECT id, user_id, expires_at, used
 			FROM magic_links
 			WHERE token = ?
-		`,
+			`,
 		)
 		.get(token);
 
@@ -578,12 +578,19 @@ app.get("/api/verify-magic-link", function (req, res) {
 		UPDATE magic_links
 		SET used = 1
 		WHERE id = ?
-	`,
+		`,
 	).run(magicLink.id);
 
 	req.session.userId = magicLink.user_id;
 
-	res.redirect("/");
+	req.session.save(function (error) {
+		if (error) {
+			console.error(error);
+			return res.status(500).send("Could not log in.");
+		}
+
+		res.redirect("/");
+	});
 });
 
 app.post("/api/logout", function (req, res) {
