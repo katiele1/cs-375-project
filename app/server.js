@@ -16,7 +16,7 @@ app.set("trust proxy", 1);
 let server = http.createServer(app);
 let wss = new WebSocketServer({ server });
 
-let hostname = "localhost";
+let hostname = "0.0.0.0";
 let port = process.env.PORT || 3000;
 
 let transporter = nodemailer.createTransport({
