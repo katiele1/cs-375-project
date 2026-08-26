@@ -1501,3 +1501,154 @@ table img {
 		padding: 28px;
 	}
 }
+
+.market-page {
+	min-height: 100vh;
+
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+
+	padding: 60px 30px;
+}
+
+.market-panel {
+	width: 100%;
+	max-width: 850px;
+
+	background: rgba(238, 252, 255, 0.94);
+
+	border: 1px solid #42d5dc;
+	border-radius: 18px;
+
+	overflow: hidden;
+
+	box-shadow: 0 12px 30px rgba(3, 46, 65, 0.25);
+}
+
+/* Market heading */
+
+.market-header {
+	display: flex;
+	align-items: center;
+	gap: 25px;
+
+	padding: 22px 28px;
+
+	background: #064b63;
+	color: white;
+}
+
+.market-header #back-button {
+	flex-shrink: 0;
+}
+
+.market-header h1 {
+	margin: 0;
+
+	color: white;
+
+	font-size: 30px;
+}
+
+.market-header p {
+	margin: 5px 0 0;
+
+	color: #c8f7ff;
+
+	font-size: 14px;
+}
+
+/* Server messages */
+
+#market-message {
+	min-height: 20px;
+
+	padding: 15px 28px 0;
+
+	text-align: center;
+
+	color: #07506b;
+
+	font-size: 14px;
+}
+
+/* Keeps the table contained */
+
+.market-table-container {
+	padding: 15px 28px 30px;
+	overflow-x: auto;
+}
+
+.market-table {
+	width: 100%;
+	min-width: 0;
+
+	margin: 0;
+
+	border-collapse: collapse;
+
+	background: white;
+
+	border-radius: 10px;
+	overflow: hidden;
+
+	box-shadow: 0 4px 12px rgba(3, 46, 65, 0.1);
+}
+
+.market-table thead tr {
+	background: #087f9c;
+	color: white;
+}
+
+.market-table th {
+	padding: 13px 16px;
+
+	text-align: left;
+
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.market-table td {
+	padding: 13px 16px;
+
+	color: #073b4c;
+
+	border-bottom: 1px solid #d9edf2;
+}
+
+.market-table tbody tr:last-child td {
+	border-bottom: none;
+}
+
+.market-table tbody tr:hover {
+	background: #eaf9fb;
+}
+
+/* Buy button generated inside the table */
+
+.market-table button {
+	padding: 7px 15px;
+
+	border-radius: 7px;
+
+	font-size: 14px;
+}
+
+@media (max-width: 700px) {
+	.market-page {
+		padding: 25px 15px;
+	}
+
+	.market-header {
+		align-items: flex-start;
+		flex-direction: column;
+
+		gap: 15px;
+	}
+
+	.market-table-container {
+		padding: 15px;
+	}
+}

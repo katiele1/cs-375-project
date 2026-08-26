@@ -1,31 +1,42 @@
 <!doctype html>
 <html>
 	<head>
-    <meta charset="utf-8" />
-    <title>Fish Market</title>
-    <link rel="stylesheet" href="style.css" />
-</head>
+		<meta charset="utf-8" />
+		<title>Fish Market</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
 
 	<body>
+		<main class="market-page">
+			<div class="market-panel">
+				<div class="market-header">
+					<button id="back-button">← Back to Game</button>
 
-		<button id="back-button">Back to Game</button>
-		<h1>Fish Market</h1>
+					<div>
+						<h1>Fish Market</h1>
+						<p>Browse catches listed by other players.</p>
+					</div>
+				</div>
 
-		<div id="market-message"></div>
+				<div id="market-message"></div>
 
-		<table>
-			<thead>
-				<tr>
-					<th>User</th>
-					<th>Fish ID</th>
-					<th>Weight</th>
-					<th>Cost</th>
-					<th>Buy</th>
-				</tr>
-			</thead>
+				<div class="market-table-container">
+					<table class="market-table">
+						<thead>
+							<tr>
+								<th>User</th>
+								<th>Fish ID</th>
+								<th>Weight</th>
+								<th>Cost</th>
+								<th>Buy</th>
+							</tr>
+						</thead>
 
-			<tbody id="market-table"></tbody>
-		</table>
+						<tbody id="market-table"></tbody>
+					</table>
+				</div>
+			</div>
+		</main>
 
 		<script src="market.js"></script>
 	</body>
