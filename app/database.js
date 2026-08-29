@@ -2,7 +2,7 @@ let Database = require("better-sqlite3");
 
 
 let path = require("path");
-let dbPath = path.join(__dirname, 'data', "gamedata.db"); 
+let dbPath = path.join('/data', "gamedata.db"); 
 let db = new Database(dbPath);
 
 const fishes = require("./fishes.json");
