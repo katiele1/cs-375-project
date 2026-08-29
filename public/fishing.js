@@ -8,6 +8,7 @@ let result = document.getElementById("result");
 let rodPower = 0.25;
 let gravity = 0.01;
 let weatherDisplay = document.getElementById("weather-display");
+let currentWeather = "Clear";
 
 let baitPosition = 70;
 let baitVelocity = 0;
@@ -73,7 +74,30 @@ function initializeFishMovement(){
         fishSpeed = 0.35;
         catchSpeed = 0.2;
     }
-    catchSpeed  += ((window.currentUser.baitLevel - 1 ) * 0.02)
+
+     switch (currentWeather) {
+        case "Clear":
+            break;
+
+        case "Clouds":
+            fishSpeed *= 0.9;
+            catchSpeed *= 1.05;
+            break;
+
+        case "Rain":
+            fishSpeed *= 1.15;
+            catchSpeed *= 1.1;
+            break;
+
+        case "Thunderstorm":
+            fishSpeed *= 1.3;
+            catchSpeed *= 1.2;
+            break;
+    }
+
+    if (window.currentUser) {
+    catchSpeed += (window.currentUser.baitLevel - 1) * 0.02;
+    }
 }
 
 async function generateFish() {
@@ -141,7 +165,7 @@ function updateFish() {
         fishDirection = 1;
     }
 
-    if (fishPosition >= 90) {
+    if (fishPosition >= 79) {
         fishPosition = 79;
         fishDirection = -1;
     }
@@ -249,7 +273,7 @@ async function catchFish() {
 }
 
 function resetGame() {
-    gameRunning = true;
+    gameRunning = false;
     holding = false;
     progress = 0;
 
@@ -268,9 +292,14 @@ function resetGame() {
     startGame();
 }
 
-document.getElementById("switch-lobby-button").addEventListener("click", function () {
-    resetGame();
-	updateWeather();
+document.getElementById("switch-lobby-button").addEventListener("click",async function () {
+    gameRunning = false;
+
+    let weatherLoaded = await updateWeather();
+
+    if (weatherLoaded) {
+        resetGame();
+    }
 });
 
 async function startGame() {
@@ -341,12 +370,25 @@ async function updateWeather() {
         if (!response.ok) {
             throw new Error(data.error);
         }
+        currentWeather = data.condition;
 
-        weatherDisplay.firstChild.textContent = `${location} Weather: ${data.condition}`;
+        weatherDisplay.firstChild.textContent = `${location} Weather: ${currentWeather}`;
+        return true;
     } catch (error) {
         weatherDisplay.firstChild.textContent = "Weather: Unavailable";
         console.error(error);
+        return false;
     }
 }
 
-updateWeather();
+
+async function initializeGame() {
+    let weatherLoaded = await updateWeather();
+
+    if (weatherLoaded) {
+        await startGame();
+    }
+}
+
+initializeGame();
+
