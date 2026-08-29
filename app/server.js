@@ -41,7 +41,7 @@ app.use(
 );
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../data")));
+app.use(express.static(path.join(__dirname, "../public")));
 
 wss.on('connection', (ws) => {
 	ws.username = "Someone"
