@@ -103,4 +103,22 @@ const importFishes = db.transaction((fishList) => {
 
 importFishes(fishes);
 
+const addDummyData = db.transaction(() => {
+  const marketCount = db.prepare("SELECT COUNT(*) AS count FROM market").get().count;
+  if (marketCount > 0) return;
+
+  const addMarket = db.prepare(`
+    INSERT INTO market (user, fish_id, weight, cost) VALUES (?, ?, ?, ?)
+  `);
+
+  addMarket.run("Jane", 1, 150, 8);
+  addMarket.run("Jack", 12, 500, 100);
+  addMarket.run("Jill", 53, 400, 25);
+  addMarket.run("Jason", 77, 5000, 40);
+  addMarket.run("John", 81, 25000, 100);
+});
+
+addDummyData();
+
+
 module.exports = db;
