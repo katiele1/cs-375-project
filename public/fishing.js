@@ -30,7 +30,7 @@ function updateFishingStats() {
 
 	rodPower = 0.25 + (window.currentUser.rodLevel - 1) * 0.03;
 
-	gravity = 0.01 - (window.currentUser.floatLevel - 1) * 0.0015;
+	gravity = 0.01 + (window.currentUser.floatLevel - 1) * 0.0015;
 }
 
 fishButton.addEventListener("mousedown", () => {
