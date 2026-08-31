@@ -759,7 +759,7 @@ table img {
 	font-size: 45px;
 	top: 55%;
 	right: 15%;
-	animation: swim-left 18s linear infinite;
+	animation: swim-right 18s linear infinite;
 }
 
 .fish-three {
@@ -771,21 +771,11 @@ table img {
 
 @keyframes swim-right {
 	0% {
-		transform: translateX(-150px);
+		transform: translateX(-150px) scaleX(-1);
 	}
 
 	100% {
-		transform: translateX(700px);
-	}
-}
-
-@keyframes swim-left {
-	0% {
-		transform: scaleX(-1) translateX(-150px);
-	}
-
-	100% {
-		transform: scaleX(-1) translateX(700px);
+		transform: translateX(700px) scaleX(-1);
 	}
 }
 
