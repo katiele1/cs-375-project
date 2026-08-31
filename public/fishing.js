@@ -6,7 +6,7 @@ let fishButton = document.getElementById("fish-button");
 let result = document.getElementById("result");
 
 let rodPower = 0.25;
-let gravity = 0.01;
+let gravity = 0.013;
 let weatherDisplay = document.getElementById("weather-display");
 let currentWeather = "Clear";
 
@@ -30,7 +30,7 @@ function updateFishingStats() {
 
 	rodPower = 0.25 + (window.currentUser.rodLevel - 1) * 0.03;
 
-	gravity = 0.01 + (window.currentUser.floatLevel - 1) * 0.0015;
+	gravity = 0.01 + (window.currentUser.floatLevel - 1) * 0.008;
 }
 
 fishButton.addEventListener("mousedown", () => {
@@ -137,8 +137,8 @@ function updateBait() {
     }
 
     // Limit falling speed
-    if (baitVelocity > 0.2) {
-        baitVelocity = 0.2;
+    if (baitVelocity > 0.25) {
+        baitVelocity = 0.25;
     }
 
     baitPosition += baitVelocity;
@@ -165,8 +165,8 @@ function updateFish() {
         fishDirection = 1;
     }
 
-    if (fishPosition >= 85) {
-        fishPosition = 85;
+    if (fishPosition >= 90) {
+        fishPosition = 90;
         fishDirection = -1;
     }
 }
