@@ -137,8 +137,8 @@ function updateBait() {
     }
 
     // Limit falling speed
-    if (baitVelocity > 0.15) {
-        baitVelocity = 0.15;
+    if (baitVelocity > 0.2) {
+        baitVelocity = 0.2;
     }
 
     baitPosition += baitVelocity;
@@ -165,8 +165,8 @@ function updateFish() {
         fishDirection = 1;
     }
 
-    if (fishPosition >= 79) {
-        fishPosition = 79;
+    if (fishPosition >= 85) {
+        fishPosition = 85;
         fishDirection = -1;
     }
 }
